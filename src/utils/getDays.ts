@@ -1,5 +1,3 @@
-import { Day } from '@src/components/Calendar/styled';
-
 const getDaysInMonth = (date: Date) =>
 	new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
@@ -40,21 +38,19 @@ export const getDays = (
 				currentDate.getMonth() - 1,
 				prevMonthDays - firstDay + 1 + i
 			);
-			days.push(
-				<Day
-					key={`prev-${i}`}
-					$isOutsideMonth={true}
-					$holiday={withHolidays && isHoliday(date)}
-				>
-					{prevMonthDays - firstDay + 1 + i}
-				</Day>
-			);
+			days.push({
+				day: prevMonthDays - firstDay + 1 + i,
+				$isOutsideMonth: true,
+				$holiday: withHolidays && isHoliday(date),
+			});
 		}
 	} else {
 		for (let i = 0; i < firstDay; i++) {
-			days.push(
-				<Day key={`prev-${i}`} $isOutsideMonth={true} $holiday={false}></Day>
-			);
+			days.push({
+				day: null,
+				$isOutsideMonth: true,
+				$holiday: false,
+			});
 		}
 	}
 
@@ -64,15 +60,11 @@ export const getDays = (
 			currentDate.getMonth(),
 			day
 		);
-		days.push(
-			<Day
-				key={day}
-				$isOutsideMonth={false}
-				$holiday={withHolidays && isHoliday(date)}
-			>
-				{day}
-			</Day>
-		);
+		days.push({
+			day: day,
+			$isOutsideMonth: false,
+			$holiday: withHolidays && isHoliday(date),
+		});
 	}
 
 	if (withExtraDays) {
@@ -83,15 +75,11 @@ export const getDays = (
 					currentDate.getMonth() + 1,
 					i
 				);
-				days.push(
-					<Day
-						key={`next-${i}`}
-						$isOutsideMonth={true}
-						$holiday={withHolidays && isHoliday(date)}
-					>
-						{i}
-					</Day>
-				);
+				days.push({
+					day: i,
+					$isOutsideMonth: true,
+					$holiday: withHolidays && isHoliday(date),
+				});
 			}
 		}
 	}
