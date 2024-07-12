@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import Next from '@src/assets/icons/Calendar/Next';
 import Prev from '@src/assets/icons/Calendar/Prev';
 import {
@@ -18,14 +18,20 @@ import {
 } from './styled';
 import { CalendarProps } from './types';
 
-const Calendar: React.FC<CalendarProps> = ({
+const Calendar: FC<CalendarProps> = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
 	withExtraDays = false,
+	withHolidays = false,
 }) => {
 	const [currentDate, setCurrentDate] = useState(defaultValue);
 
-	const days = getDays(currentDate, startDayOfWeek, withExtraDays);
+	const days = getDays(
+		currentDate,
+		startDayOfWeek,
+		withExtraDays,
+		withHolidays
+	);
 
 	const handlePrevMonth = () => {
 		setCurrentDate(
@@ -60,7 +66,9 @@ const Calendar: React.FC<CalendarProps> = ({
 					<Weekday key={index}>{day}</Weekday>
 				))}
 			</Weekdays>
-			<Days>{days}</Days>
+			<Days $withHolidays={withHolidays} $startDayOfWeek={startDayOfWeek}>
+				{days}
+			</Days>
 		</CalendarContainer>
 	);
 };

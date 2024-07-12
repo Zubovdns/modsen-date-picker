@@ -5,6 +5,8 @@ const GREY_TEXT_COLOR = '#AAA';
 const BLACK_COLOR = '#333';
 const LIGHTGREY_COLOR = '#F1F1F1';
 const WHITE_COLOR = '#FFF';
+const RED_COLOR = 'red';
+const RED_GREY_COLOR = '#FFC1C1';
 
 export const CalendarContainer = styled.div`
 	width: 300px;
@@ -44,32 +46,43 @@ export const Weekday = styled.div`
 	font-weight: bolder;
 `;
 
-export const Days = styled.div`
+export const Days = styled.div<{
+	$withHolidays: boolean;
+	$startDayOfWeek: 'monday' | 'sunday';
+}>`
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
 	gap: 5px;
 `;
 
-export const Day = styled.div<{ $isOutsideMonth: boolean }>`
+export const Day = styled.div<{
+	$isOutsideMonth: boolean;
+	$holiday: boolean;
+}>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 40px;
 	border-radius: 8px;
 	cursor: pointer;
-	color: ${({ $isOutsideMonth }) =>
-		$isOutsideMonth ? GREY_TEXT_COLOR : BLACK_COLOR};
+	color: ${({ $isOutsideMonth, $holiday }) =>
+		$isOutsideMonth
+			? $holiday
+				? RED_GREY_COLOR
+				: GREY_TEXT_COLOR
+			: $holiday
+				? RED_COLOR
+				: BLACK_COLOR};
 
 	&:hover {
 		background-color: ${LIGHTGREY_COLOR};
-		color: ${BLACK_COLOR};
-		background-color: ${LIGHTGREY_COLOR};
-		color: ${({ $isOutsideMonth }) =>
-			$isOutsideMonth ? GREY_TEXT_COLOR : BLACK_COLOR};
+		color: ${({ $isOutsideMonth, $holiday }) =>
+			$isOutsideMonth
+				? $holiday
+					? RED_GREY_COLOR
+					: GREY_TEXT_COLOR
+				: $holiday
+					? RED_COLOR
+					: BLACK_COLOR};
 	}
-`;
-
-export const EmptyDay = styled.div`
-	height: 40px;
-	border-radius: 8px;
 `;

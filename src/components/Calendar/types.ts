@@ -3,4 +3,5 @@ export type CalendarProps = {
 	startDayOfWeek?: 'sunday' | 'monday';
 	withExtraDays?: boolean;
 	className?: string;
+	withHolidays?: boolean;
 };
