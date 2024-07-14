@@ -40,7 +40,8 @@
 			"@utils/*": ["utils/*"],
 			"@constants/*": ["constants/*"],
 			"@assets/*": ["assets/*"],
-			"@icons/*": ["assets/icons*"]
+			"@icons/*": ["assets/icons*"],
+			"@styles/*": ["styles/*"]
 		}
 	},
 	"include": ["src/**/*"],

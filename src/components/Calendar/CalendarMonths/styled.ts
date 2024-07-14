@@ -1,6 +1,5 @@
+import colors from '@styles/colors';
 import styled from 'styled-components';
-
-const LIGHTGREY_COLOR = '#F1F1F1';
 
 export const Months = styled.div`
 	display: grid;
@@ -19,6 +18,6 @@ export const Month = styled.div`
 	transition: background-color 0.1s ease;
 
 	&:hover {
-		background-color: ${LIGHTGREY_COLOR};
+		background-color: ${colors.monthHoverBg};
 	}
 `;

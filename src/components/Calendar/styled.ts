@@ -1,16 +1,13 @@
+import colors from '@styles/colors';
 import styled from 'styled-components';
-
-const GREY_BORDER_COLOR = '#E1E1E1';
-const WHITE_COLOR = '#FFF';
-const LIGHTGREY_COLOR = '#F1F1F1';
 
 export const CalendarContainer = styled.div`
 	width: 300px;
-	border: 1px solid ${GREY_BORDER_COLOR};
+	border: 1px solid ${colors.calendarBorder};
 	border-radius: 8px;
 	padding: 10px;
 	font-family: 'Open Sans', sans-serif;
-	background-color: ${WHITE_COLOR};
+	background-color: ${colors.calendarBg};
 `;
 
 export const Header = styled.div`
@@ -28,7 +25,7 @@ export const HeaderTitle = styled.div`
 	transition: background-color 0.1s ease;
 
 	&:hover {
-		background-color: ${LIGHTGREY_COLOR};
+		background-color: ${colors.calendarHoverButtonBg};
 	}
 `;
 
@@ -42,6 +39,6 @@ export const Button = styled.button`
 	transition: background-color 0.1s ease;
 
 	&:hover {
-		background-color: ${LIGHTGREY_COLOR};
+		background-color: ${colors.calendarHoverButtonBg};
 	}
 `;

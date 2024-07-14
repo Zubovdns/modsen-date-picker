@@ -1,6 +1,5 @@
+import colors from '@styles/colors';
 import styled from 'styled-components';
-
-const LIGHTGREY_COLOR = '#F1F1F1';
 
 export const Years = styled.div`
 	display: grid;
@@ -21,6 +20,6 @@ export const Year = styled.div`
 	transition: background-color 0.1s ease;
 
 	&:hover {
-		background-color: ${LIGHTGREY_COLOR};
+		background-color: ${colors.yearHoverBg};
 	}
 `;
