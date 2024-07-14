@@ -37,4 +37,11 @@ export const Button = styled.button`
 	border: none;
 	cursor: pointer;
 	font-size: 18px;
+	border-radius: 8px;
+
+	transition: background-color 0.1s ease;
+
+	&:hover {
+		background-color: ${LIGHTGREY_COLOR};
+	}
 `;
