@@ -40,6 +40,7 @@ export const getDays = (
 			);
 			days.push({
 				day: prevMonthDays - firstDay + 1 + i,
+				date,
 				$isOutsideMonth: true,
 				$holiday: withHolidays && isHoliday(date),
 			});
@@ -48,6 +49,7 @@ export const getDays = (
 		for (let i = 0; i < firstDay; i++) {
 			days.push({
 				day: null,
+				date: new Date(0),
 				$isOutsideMonth: true,
 				$holiday: false,
 			});
@@ -62,6 +64,7 @@ export const getDays = (
 		);
 		days.push({
 			day: day,
+			date,
 			$isOutsideMonth: false,
 			$holiday: withHolidays && isHoliday(date),
 		});
@@ -77,6 +80,7 @@ export const getDays = (
 				);
 				days.push({
 					day: i,
+					date,
 					$isOutsideMonth: true,
 					$holiday: withHolidays && isHoliday(date),
 				});
