@@ -25,7 +25,7 @@ export const Day = styled.div<{
 	align-items: center;
 	height: 40px;
 	border-radius: 8px;
-	cursor: pointer;
+	cursor: ${({ $isOutsideMonth }) => ($isOutsideMonth ? 'default' : 'pointer')};
 	transition: background-color 0.1s ease;
 	background-color: ${({ $isSelected }) =>
 		$isSelected ? SELECTED_COLOR : 'transparent'};
@@ -41,7 +41,11 @@ export const Day = styled.div<{
 					: BLACK_COLOR};
 
 	&:hover {
-		background-color: ${({ $isSelected }) =>
-			$isSelected ? SELECTED_COLOR : LIGHTGREY_COLOR};
+		background-color: ${({ $isSelected, $isOutsideMonth }) =>
+			$isSelected
+				? SELECTED_COLOR
+				: $isOutsideMonth
+					? 'transparent'
+					: LIGHTGREY_COLOR};
 	}
 `;
