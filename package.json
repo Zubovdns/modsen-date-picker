@@ -60,7 +60,8 @@
 		"storybook": "^8.2.1",
 		"styled-components": "^6.1.11",
 		"tsconfig-paths-webpack-plugin": "^4.1.0",
-		"typescript": "^5.5.3"
+		"typescript": "^5.5.3",
+		"uuid": "^10.0.0"
 	},
 	"peerDependencies": {
 		"react": "^18.3.1"
