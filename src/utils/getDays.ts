@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const getDaysInMonth = (date: Date) =>
 	new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
@@ -31,29 +33,19 @@ export const getDays = (
 	const nextMonthStartDay = (firstDay + daysInMonth) % 7;
 	const days = [];
 
-	if (withExtraDays) {
-		for (let i = 0; i < firstDay; i++) {
-			const date = new Date(
-				currentDate.getFullYear(),
-				currentDate.getMonth() - 1,
-				prevMonthDays - firstDay + 1 + i
-			);
-			days.push({
-				day: prevMonthDays - firstDay + 1 + i,
-				date,
-				$isOutsideMonth: true,
-				$holiday: withHolidays && isHoliday(date),
-			});
-		}
-	} else {
-		for (let i = 0; i < firstDay; i++) {
-			days.push({
-				day: null,
-				date: new Date(0),
-				$isOutsideMonth: true,
-				$holiday: false,
-			});
-		}
+	for (let i = 0; i < firstDay; i++) {
+		const date = new Date(
+			currentDate.getFullYear(),
+			currentDate.getMonth() - 1,
+			prevMonthDays - firstDay + 1 + i
+		);
+		days.push({
+			key: uuidv4(),
+			day: withExtraDays ? prevMonthDays - firstDay + 1 + i : null,
+			date,
+			$isOutsideMonth: true,
+			$holiday: withExtraDays ? withHolidays && isHoliday(date) : false,
+		});
 	}
 
 	for (let day = 1; day <= daysInMonth; day++) {
@@ -63,6 +55,7 @@ export const getDays = (
 			day
 		);
 		days.push({
+			key: uuidv4(),
 			day: day,
 			date,
 			$isOutsideMonth: false,
@@ -79,6 +72,7 @@ export const getDays = (
 					i
 				);
 				days.push({
+					key: uuidv4(),
 					day: i,
 					date,
 					$isOutsideMonth: true,
