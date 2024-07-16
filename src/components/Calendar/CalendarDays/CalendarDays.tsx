@@ -25,6 +25,8 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 		date.getMonth() === selectedDate.getMonth() &&
 		date.getDate() === selectedDate.getDate();
 
+	console.log(days, withExtraDays, withHolidays);
+
 	return (
 		<Days>
 			{days.map((dayInfo) => (
