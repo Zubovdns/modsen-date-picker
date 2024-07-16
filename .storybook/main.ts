@@ -20,7 +20,23 @@ const config: StorybookConfig = {
 	],
 	framework: {
 		name: '@storybook/react-webpack5',
-		options: {},
+		options: {
+			builder: {
+				useSWC: true,
+			},
+		},
+	},
+	swc: () => ({
+		jsc: {
+			transform: {
+				react: {
+					runtime: 'automatic',
+				},
+			},
+		},
+	}),
+	docs: {
+		autodocs: 'tag',
 	},
 	webpackFinal: async (config) => {
 		if (config.resolve) {
@@ -33,10 +49,6 @@ const config: StorybookConfig = {
 		}
 
 		return config;
-	},
-	babel: async (options) => {
-		options.presets.push(['@babel/preset-react', { runtime: 'automatic' }]);
-		return options;
 	},
 };
 

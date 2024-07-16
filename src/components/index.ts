@@ -1,1 +1,2 @@
-export { default as DatePicker } from '@components/DatePicker';
+export { default as Calendar } from '@components/Calendar';
+export { default as Datepicker } from '@components/Datepicker';
