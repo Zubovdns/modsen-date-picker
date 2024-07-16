@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import colors from '@styles/colors';
 import styled, { css } from 'styled-components';
 
@@ -23,26 +22,41 @@ export const Day = styled.div<{
 
 	transition: background-color 0.1s ease;
 
-	${(props) =>
-		props.$isOutsideMonth &&
+	color: ${({ $isOutsideMonth, $holiday, $isSelected, $withExtraDays }) => {
+		if ($isSelected) {
+			return colors.dateSelectedText;
+		} else if ($holiday && $isOutsideMonth && $withExtraDays) {
+			return colors.holidayInactiveDateText;
+		} else if ($holiday) {
+			return colors.holidayDateText;
+		} else if ($isOutsideMonth && $withExtraDays) {
+			return colors.inactiveDateText;
+		} else {
+			return 'inherit';
+		}
+	}};
+
+	background-color: ${({ $isSelected }) =>
+		$isSelected ? colors.dateSelectedBg : 'inherit'};
+
+	${({ $isOutsideMonth, $withExtraDays }) =>
+		$isOutsideMonth &&
+		!$withExtraDays &&
 		css`
-			color: ${colors.inactiveDateText};
+			cursor: default;
+			&:hover {
+				background-color: inherit;
+			}
 		`}
 
-	${(props) =>
-		props.$holiday &&
-		css`
-			color: ${colors.holidayDateText};
-		`}
-
-  ${(props) =>
-		props.$isSelected &&
-		css`
-			background-color: ${colors.dateSelectedBg};
-			color: ${colors.dateSelectedText};
-		`}
-
-  &:hover {
-		background-color: ${colors.dateHoverBg};
+	&:hover {
+		background-color: ${({ $isSelected }) =>
+			$isSelected ? '#81B3F4' : colors.dateHoverBg};
+		${({ $isOutsideMonth, $withExtraDays }) =>
+			$isOutsideMonth &&
+			!$withExtraDays &&
+			css`
+				background-color: inherit;
+			`}
 	}
 `;
