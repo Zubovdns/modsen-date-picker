@@ -35,7 +35,7 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 					$isSelected={!!isSelected(dayInfo.date)}
 					$withExtraDays={withExtraDays}
 					onClick={() =>
-						!dayInfo.$isOutsideMonth &&
+						(dayInfo.$isOutsideMonth ? withExtraDays : true) &&
 						onSelectDate &&
 						onSelectDate(dayInfo.date)
 					}
