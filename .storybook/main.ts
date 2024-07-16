@@ -12,7 +12,6 @@ const config: StorybookConfig = {
 
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
-		'@storybook/addon-onboarding',
 		'@storybook/addon-links',
 		'@storybook/addon-essentials',
 		'@chromatic-com/storybook',
@@ -35,9 +34,7 @@ const config: StorybookConfig = {
 			},
 		},
 	}),
-	docs: {
-		autodocs: 'tag',
-	},
+	docs: {},
 	webpackFinal: async (config) => {
 		if (config.resolve) {
 			config.resolve.plugins = [
