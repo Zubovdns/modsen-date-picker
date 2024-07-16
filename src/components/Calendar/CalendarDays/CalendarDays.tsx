@@ -9,6 +9,8 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 	startDayOfWeek,
 	withExtraDays,
 	withHolidays,
+	onSelectDate,
+	selectedDate,
 }) => {
 	const days = getDays(
 		currentDate,
@@ -16,13 +18,27 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 		withExtraDays,
 		withHolidays
 	);
+
+	const isSelected = (date: Date) =>
+		selectedDate &&
+		date.getFullYear() === selectedDate.getFullYear() &&
+		date.getMonth() === selectedDate.getMonth() &&
+		date.getDate() === selectedDate.getDate();
+
 	return (
 		<Days>
-			{days.map((dayInfo, index) => (
+			{days.map((dayInfo) => (
 				<Day
-					key={index}
+					key={dayInfo.key}
 					$isOutsideMonth={dayInfo.$isOutsideMonth}
 					$holiday={dayInfo.$holiday}
+					$isSelected={!!isSelected(dayInfo.date)}
+					$withExtraDays={withExtraDays}
+					onClick={() =>
+						!dayInfo.$isOutsideMonth &&
+						onSelectDate &&
+						onSelectDate(dayInfo.date)
+					}
 				>
 					{dayInfo.day !== null ? dayInfo.day : ''}
 				</Day>

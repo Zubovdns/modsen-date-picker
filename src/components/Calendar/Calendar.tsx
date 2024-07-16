@@ -1,7 +1,9 @@
-import { FC, useState } from 'react';
-import Next from '@src/assets/icons/Calendar/Next';
-import Prev from '@src/assets/icons/Calendar/Prev';
-import { monthNames } from '@src/constants/dates';
+import { FC, useEffect, useState } from 'react';
+import Next from '@assets/icons/Calendar/Next';
+import Prev from '@assets/icons/Calendar/Prev';
+import { monthNames } from '@constants/dates';
+
+import { WithDatepickerServiceProps } from '../Datepicker/types';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
@@ -10,14 +12,22 @@ import CalendarYears from './CalendarYears';
 import { Button, CalendarContainer, Header, HeaderTitle } from './styled';
 import { CalendarProps } from './types';
 
-const Calendar: FC<CalendarProps> = ({
+const Calendar: FC<CalendarProps & Partial<WithDatepickerServiceProps>> = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
 	withExtraDays = false,
 	withHolidays = false,
+	selectedDate,
+	onDateSelect,
 }) => {
 	const [currentDate, setCurrentDate] = useState(defaultValue);
 	const [view, setView] = useState<'days' | 'months' | 'years'>('days');
+
+	useEffect(() => {
+		if (selectedDate) {
+			setCurrentDate(selectedDate);
+		}
+	}, [selectedDate]);
 
 	const handlePrevMonth = () => {
 		setCurrentDate(
@@ -71,6 +81,8 @@ const Calendar: FC<CalendarProps> = ({
 						startDayOfWeek={startDayOfWeek}
 						withExtraDays={withExtraDays}
 						withHolidays={withHolidays}
+						onSelectDate={onDateSelect}
+						selectedDate={selectedDate}
 					/>
 				</>
 			)}

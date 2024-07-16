@@ -50,10 +50,6 @@ const config: StorybookConfig = {
 
 		return config;
 	},
-	babel: async (options) => {
-		options.presets.push(['@babel/preset-react', { runtime: 'automatic' }]);
-		return options;
-	},
 };
 
 export default config;
