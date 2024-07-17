@@ -51,8 +51,12 @@ export const Day = styled.div<{
 		$isStartDate,
 		$isEndDate,
 		$isInRange,
+		$isOutsideMonth,
+		$withExtraDays,
 	}) => {
-		if ($isSelected || $isStartDate || $isEndDate) {
+		if ($isOutsideMonth && !$withExtraDays) {
+			return 'inherit';
+		} else if ($isSelected || $isStartDate || $isEndDate) {
 			return colors.dateSelectedBg;
 		} else if ($isInRange) {
 			return colors.dateInRangeBg;
