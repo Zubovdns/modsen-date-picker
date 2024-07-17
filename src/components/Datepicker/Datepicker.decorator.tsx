@@ -34,12 +34,18 @@ const withDatepickerService = <P extends CalendarProps>(
 			}
 		};
 
+		const handleClear = () => {
+			setSelectedDate(null);
+			calendarServiceRef.current.clearDate();
+		};
+
 		return (
 			<DatepickerContainer>
 				<DateInput
 					label='Date'
 					value={selectedDate}
 					onChange={handleDateSelect}
+					onClear={handleClear}
 				/>
 				<WrappedComponent
 					{...(props as P)}

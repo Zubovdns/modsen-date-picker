@@ -7,6 +7,10 @@ class AbstractDatepickerService {
 		this.selectedDate = date;
 	}
 
+	clearDate() {
+		this.selectedDate = null;
+	}
+
 	getSelectedDate(): Date | null {
 		return this.selectedDate;
 	}
@@ -17,6 +21,10 @@ class DatepickerService {
 
 	selectDate(date: Date) {
 		this.datepickerService.selectDate(date);
+	}
+
+	clearDate() {
+		this.datepickerService.clearDate();
 	}
 
 	getSelectedDate(): Date | null {
@@ -32,6 +40,9 @@ export const useDatepickerService = (ref: MutableRefObject<unknown>) => {
 		() => ({
 			selectDate: (date: Date) => {
 				decorator.current.selectDate(date);
+			},
+			clearDate() {
+				decorator.current.clearDate();
 			},
 			getSelectedDate: () => decorator.current.getSelectedDate(),
 		}),

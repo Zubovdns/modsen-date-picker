@@ -8,7 +8,12 @@ import { parseDate } from '@utils/parseDate';
 import { Container, IconButton, IconWrapper, Input, Label } from './styled';
 import { DateInputProps } from './types';
 
-const DateInput: React.FC<DateInputProps> = ({ value, onChange, label }) => {
+const DateInput: React.FC<DateInputProps> = ({
+	value,
+	onChange,
+	label,
+	onClear,
+}) => {
 	const [inputValue, setInputValue] = useState(value ? formatDate(value) : '');
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -51,7 +56,7 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange, label }) => {
 
 	const handleClear = () => {
 		setInputValue('');
-		onChange(null);
+		onClear();
 	};
 
 	return (
