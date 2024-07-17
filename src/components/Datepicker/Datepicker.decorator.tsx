@@ -2,8 +2,8 @@
 import { ComponentType, FC, useEffect, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
+import DateInput from '../DateInput';
 
-import DateInput from './DateInput';
 import { useDatepickerService } from './Datepicker.service';
 import { DatepickerContainer } from './styled';
 import { WithDatepickerServiceProps } from './types';
