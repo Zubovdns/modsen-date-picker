@@ -36,7 +36,11 @@ const withDatepickerService = <P extends CalendarProps>(
 
 		return (
 			<DatepickerContainer>
-				<DateInput value={selectedDate} onChange={handleDateSelect} />
+				<DateInput
+					label='Date'
+					value={selectedDate}
+					onChange={handleDateSelect}
+				/>
 				<WrappedComponent
 					{...(props as P)}
 					selectedDate={selectedDate}

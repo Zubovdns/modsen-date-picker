@@ -4,6 +4,13 @@ export const Container = styled.div`
 	position: relative;
 	width: 100%;
 	margin-bottom: 10px;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Open Sans', sans-serif;
+`;
+
+export const Label = styled.p`
+	margin: 4px 0;
 `;
 
 export const Input = styled.input`
@@ -18,7 +25,7 @@ export const Input = styled.input`
 export const IconWrapper = styled.div`
 	position: absolute;
 	left: 8px;
-	top: 50%;
+	top: 71%;
 	transform: translateY(-50%);
 	pointer-events: none;
 `;
@@ -26,7 +33,7 @@ export const IconWrapper = styled.div`
 export const IconButton = styled.button`
 	position: absolute;
 	right: 8px;
-	top: 50%;
+	top: 71%;
 	transform: translateY(-50%);
 	background: none;
 	border: none;
