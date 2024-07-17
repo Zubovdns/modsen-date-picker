@@ -2,8 +2,10 @@
 import { ComponentType, FC, useEffect, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
+import DateInput from '../DateInput';
 
 import { useRangeDatepickerService } from './RangeDatepicker.service';
+import { RangeDatepickerContainer } from './styled';
 import { WithRangeDatepickerServiceProps } from './types';
 
 const withRangeDatepickerService = <P extends CalendarProps>(
@@ -36,13 +38,49 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 			setEndDate(calendarServiceRef.current.getEndDate());
 		};
 
+		const handleStartDateSelect = (date: Date | null) => {
+			calendarServiceRef.current.selectStartDate(date);
+			setStartDate(calendarServiceRef.current.getEndDate());
+		};
+
+		const handleEndDateSelect = (date: Date | null) => {
+			calendarServiceRef.current.selectEndDate(date);
+			setEndDate(calendarServiceRef.current.getStartDate());
+		};
+
+		const handleClearStartDate = () => {
+			calendarServiceRef.current.clearStartDate();
+			setStartDate(calendarServiceRef.current.getStartDate());
+			setEndDate(calendarServiceRef.current.getEndDate());
+		};
+
+		const handleClearEndDate = () => {
+			calendarServiceRef.current.clearEndDate();
+			setEndDate(calendarServiceRef.current.getEndDate());
+		};
+
+		console.log(startDate, endDate);
 		return (
-			<WrappedComponent
-				{...(props as P)}
-				startDate={startDate}
-				endDate={endDate}
-				onDateSelect={handleDateSelect}
-			/>
+			<RangeDatepickerContainer>
+				<DateInput
+					label='From'
+					value={startDate}
+					onChange={handleStartDateSelect}
+					onClear={handleClearStartDate}
+				/>
+				<DateInput
+					label='To'
+					value={endDate}
+					onChange={handleEndDateSelect}
+					onClear={handleClearEndDate}
+				/>
+				<WrappedComponent
+					{...(props as P)}
+					startDate={startDate}
+					endDate={endDate}
+					onDateSelect={handleDateSelect}
+				/>
+			</RangeDatepickerContainer>
 		);
 	};
 

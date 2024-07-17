@@ -18,6 +18,25 @@ class AbstractDatepickerService {
 		}
 	}
 
+	selectStartDate(date: Date | null) {
+		this.startDate = date;
+	}
+
+	selectEndDate(date: Date | null) {
+		this.endDate = date;
+	}
+
+	clearStartDate() {
+		this.startDate = null;
+		this.endDate = null;
+		this.rangeStatus = false;
+	}
+
+	clearEndDate() {
+		this.endDate = null;
+		if (this.startDate) this.rangeStatus = true;
+	}
+
 	getStartDate(): Date | null {
 		return this.startDate;
 	}
@@ -36,6 +55,22 @@ class RangeDatepickerService {
 
 	selectDate(date: Date) {
 		this.datepickerService.selectDate(date);
+	}
+
+	selectStartDate(date: Date | null) {
+		this.datepickerService.selectStartDate(date);
+	}
+
+	selectEndDate(date: Date | null) {
+		this.datepickerService.selectEndDate(date);
+	}
+
+	clearStartDate() {
+		this.datepickerService.clearStartDate();
+	}
+
+	clearEndDate() {
+		this.datepickerService.clearEndDate();
 	}
 
 	getStartDate(): Date | null {
@@ -59,6 +94,18 @@ export const useRangeDatepickerService = (ref: MutableRefObject<unknown>) => {
 		() => ({
 			selectDate: (date: Date) => {
 				decorator.current.selectDate(date);
+			},
+			selectStartDate(date: Date | null) {
+				decorator.current.selectStartDate(date);
+			},
+			selectEndDate(date: Date | null) {
+				decorator.current.selectEndDate(date);
+			},
+			clearStartDate() {
+				decorator.current.clearStartDate();
+			},
+			clearEndDate() {
+				decorator.current.clearEndDate();
 			},
 			getStartDate: () => decorator.current.getStartDate(),
 			getEndDate: () => decorator.current.getEndDate(),
