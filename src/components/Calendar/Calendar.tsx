@@ -4,6 +4,7 @@ import Prev from '@assets/icons/Calendar/Prev';
 import { monthNames } from '@constants/dates';
 
 import { WithDatepickerServiceProps } from '../Datepicker/types';
+import { WithRangeDatepickerServiceProps } from '../RangeDatepicker/types';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
@@ -12,12 +13,17 @@ import CalendarYears from './CalendarYears';
 import { Button, CalendarContainer, Header, HeaderTitle } from './styled';
 import { CalendarProps } from './types';
 
-const Calendar: FC<CalendarProps & Partial<WithDatepickerServiceProps>> = ({
+const Calendar: FC<
+	CalendarProps &
+		Partial<WithDatepickerServiceProps & WithRangeDatepickerServiceProps>
+> = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
 	withExtraDays = false,
 	withHolidays = false,
 	selectedDate,
+	startDate,
+	endDate,
 	onDateSelect,
 }) => {
 	const [currentDate, setCurrentDate] = useState(defaultValue);
@@ -83,6 +89,8 @@ const Calendar: FC<CalendarProps & Partial<WithDatepickerServiceProps>> = ({
 						withHolidays={withHolidays}
 						onSelectDate={onDateSelect}
 						selectedDate={selectedDate}
+						startDate={startDate}
+						endDate={endDate}
 					/>
 				</>
 			)}

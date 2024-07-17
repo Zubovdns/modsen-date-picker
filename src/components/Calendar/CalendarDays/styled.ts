@@ -11,6 +11,9 @@ export const Day = styled.div<{
 	$isOutsideMonth: boolean;
 	$holiday: boolean;
 	$isSelected: boolean;
+	$isStartDate: boolean;
+	$isEndDate: boolean;
+	$isInRange: boolean;
 	$withExtraDays: boolean;
 }>`
 	display: flex;
@@ -22,8 +25,15 @@ export const Day = styled.div<{
 
 	transition: background-color 0.1s ease;
 
-	color: ${({ $isOutsideMonth, $holiday, $isSelected, $withExtraDays }) => {
-		if ($isSelected) {
+	color: ${({
+		$isOutsideMonth,
+		$holiday,
+		$isSelected,
+		$isStartDate,
+		$isEndDate,
+		$withExtraDays,
+	}) => {
+		if ($isSelected || $isStartDate || $isEndDate) {
 			return colors.dateSelectedText;
 		} else if ($holiday && $isOutsideMonth && $withExtraDays) {
 			return colors.holidayInactiveDateText;
@@ -36,8 +46,20 @@ export const Day = styled.div<{
 		}
 	}};
 
-	background-color: ${({ $isSelected }) =>
-		$isSelected ? colors.dateSelectedBg : 'inherit'};
+	background-color: ${({
+		$isSelected,
+		$isStartDate,
+		$isEndDate,
+		$isInRange,
+	}) => {
+		if ($isSelected || $isStartDate || $isEndDate) {
+			return colors.dateSelectedBg;
+		} else if ($isInRange) {
+			return colors.dateInRangeBg;
+		} else {
+			return 'inherit';
+		}
+	}};
 
 	${({ $isOutsideMonth, $withExtraDays }) =>
 		$isOutsideMonth &&
@@ -50,8 +72,10 @@ export const Day = styled.div<{
 		`}
 
 	&:hover {
-		background-color: ${({ $isSelected }) =>
-			$isSelected ? '#81B3F4' : colors.dateHoverBg};
+		background-color: ${({ $isSelected, $isStartDate, $isEndDate }) =>
+			$isSelected || $isStartDate || $isEndDate
+				? '#81B3F4'
+				: colors.dateHoverBg};
 		${({ $isOutsideMonth, $withExtraDays }) =>
 			$isOutsideMonth &&
 			!$withExtraDays &&

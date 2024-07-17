@@ -14,4 +14,6 @@ export const colors = {
 	calendarBorder: '#E1E1E1',
 	calendarBg: '#FFF',
 	calendarHoverButtonBg: '#F1F1F1',
+
+	dateInRangeBg: '#E9F2FD',
 };
