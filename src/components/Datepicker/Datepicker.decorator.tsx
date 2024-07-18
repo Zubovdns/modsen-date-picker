@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentType, FC, useEffect, useRef, useState } from 'react';
+import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
@@ -20,12 +20,6 @@ const withDatepickerService = <P extends CalendarProps>(
 		const [selectedDate, setSelectedDate] = useState<Date | null>(
 			props.defaultValue || new Date()
 		);
-
-		useEffect(() => {
-			if (calendarServiceRef.current && selectedDate === null) {
-				setSelectedDate(calendarServiceRef.current.getSelectedDate());
-			}
-		}, [calendarServiceRef.current?.getSelectedDate()]);
 
 		const handleDateSelect = (date: Date | null) => {
 			setSelectedDate(date);
