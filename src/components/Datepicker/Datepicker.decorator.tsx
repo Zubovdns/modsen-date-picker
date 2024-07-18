@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentType, FC, useEffect, useRef, useState } from 'react';
+import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
+import DateInput from '../DateInput';
 
-import DateInput from './DateInput';
 import { useDatepickerService } from './Datepicker.service';
 import { DatepickerContainer } from './styled';
 import { WithDatepickerServiceProps } from './types';
@@ -21,12 +21,6 @@ const withDatepickerService = <P extends CalendarProps>(
 			props.defaultValue || new Date()
 		);
 
-		useEffect(() => {
-			if (calendarServiceRef.current && selectedDate === null) {
-				setSelectedDate(calendarServiceRef.current.getSelectedDate());
-			}
-		}, [calendarServiceRef.current?.getSelectedDate()]);
-
 		const handleDateSelect = (date: Date | null) => {
 			setSelectedDate(date);
 			if (calendarServiceRef.current) {
@@ -34,9 +28,19 @@ const withDatepickerService = <P extends CalendarProps>(
 			}
 		};
 
+		const handleClear = () => {
+			setSelectedDate(null);
+			calendarServiceRef.current.clearDate();
+		};
+
 		return (
 			<DatepickerContainer>
-				<DateInput value={selectedDate} onChange={handleDateSelect} />
+				<DateInput
+					label='Date'
+					value={selectedDate}
+					onChange={handleDateSelect}
+					onClear={handleClear}
+				/>
 				<WrappedComponent
 					{...(props as P)}
 					selectedDate={selectedDate}

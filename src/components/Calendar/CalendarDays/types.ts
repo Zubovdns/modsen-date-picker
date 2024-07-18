@@ -5,4 +5,6 @@ export type CalendarDaysProps = {
 	withHolidays: boolean;
 	onSelectDate?: (date: Date) => void;
 	selectedDate?: Date | null;
+	startDate?: Date | null;
+	endDate?: Date | null;
 };

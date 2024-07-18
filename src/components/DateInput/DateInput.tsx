@@ -5,10 +5,15 @@ import { formatDate } from '@utils/formatDate';
 import { isValidDate } from '@utils/isValidDate';
 import { parseDate } from '@utils/parseDate';
 
-import { Container, IconButton, IconWrapper, Input } from './styled';
+import { Container, IconButton, IconWrapper, Input, Label } from './styled';
 import { DateInputProps } from './types';
 
-const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
+const DateInput: React.FC<DateInputProps> = ({
+	value,
+	onChange,
+	label,
+	onClear,
+}) => {
 	const [inputValue, setInputValue] = useState(value ? formatDate(value) : '');
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -51,11 +56,12 @@ const DateInput: React.FC<DateInputProps> = ({ value, onChange }) => {
 
 	const handleClear = () => {
 		setInputValue('');
-		onChange(null);
+		onClear();
 	};
 
 	return (
 		<Container>
+			<Label>{label}</Label>
 			<IconWrapper>
 				<CalendarIcon />
 			</IconWrapper>
