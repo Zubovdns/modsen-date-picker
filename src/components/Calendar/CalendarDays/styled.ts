@@ -78,7 +78,7 @@ export const Day = styled.div<{
 	&:hover {
 		background-color: ${({ $isSelected, $isStartDate, $isEndDate }) =>
 			$isSelected || $isStartDate || $isEndDate
-				? '#81B3F4'
+				? colors.dateInRangeHoveredBg
 				: colors.dateHoverBg};
 		${({ $isOutsideMonth, $withExtraDays }) =>
 			$isOutsideMonth &&

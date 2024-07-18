@@ -1,3 +1,4 @@
+import colors from '@src/styles/colors';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -16,7 +17,7 @@ export const Label = styled.p`
 export const Input = styled.input`
 	width: 100%;
 	padding: 12px 32px;
-	border: 1px solid #ccc;
+	border: 1px solid ${colors.dateInputBorder};
 	border-radius: 8px;
 	box-sizing: border-box;
 	font-size: 16px;

@@ -16,4 +16,7 @@ export const colors = {
 	calendarHoverButtonBg: '#F1F1F1',
 
 	dateInRangeBg: '#E9F2FD',
+	dateInRangeHoveredBg: '#81B3F4',
+
+	dateInputBorder: '#ccc',
 };
