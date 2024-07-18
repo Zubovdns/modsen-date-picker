@@ -5,6 +5,7 @@ import { monthNames } from '@constants/dates';
 
 import { WithDatepickerServiceProps } from '../Datepicker/types';
 import { WithRangeDatepickerServiceProps } from '../RangeDatepicker/types';
+import { WithTaskDatepickerServiceProps } from '../TaskDatepicker/types';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
@@ -15,7 +16,11 @@ import { CalendarProps } from './types';
 
 const Calendar: FC<
 	CalendarProps &
-		Partial<WithDatepickerServiceProps & WithRangeDatepickerServiceProps>
+		Partial<
+			WithDatepickerServiceProps &
+				WithRangeDatepickerServiceProps &
+				WithTaskDatepickerServiceProps
+		>
 > = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',

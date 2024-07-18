@@ -19,4 +19,8 @@ export const colors = {
 	dateInRangeHoveredBg: '#81B3F4',
 
 	dateInputBorder: '#ccc',
+
+	taskListButtonBg: '#2F80ED',
+	taskListButtonText: '#FFF',
+	taskListButtonHoverBg: '#81B3F4',
 };
