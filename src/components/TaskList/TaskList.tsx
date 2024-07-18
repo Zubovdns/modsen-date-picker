@@ -59,6 +59,10 @@ const TaskList: FC<TaskListProps> = ({
 		removeTask(id);
 	};
 
+	const handleAddClick = () => {
+		addTask();
+	};
+
 	// ! костыль
 	const uniqueTasks = Array.from(
 		new Map(tasks.map((task) => [task.id, task])).values()
@@ -87,6 +91,7 @@ const TaskList: FC<TaskListProps> = ({
 									/>
 								) : (
 									<TaskName
+										$completed={task.completed}
 										onDoubleClick={() => handleEditTask(task.id, task.name)}
 									>
 										{task.name}
@@ -98,7 +103,7 @@ const TaskList: FC<TaskListProps> = ({
 							</Task>
 						))}
 					</List>
-					<AddButton onClick={addTask}>Add Task</AddButton>
+					<AddButton onClick={handleAddClick}>Add Task</AddButton>
 				</>
 			) : (
 				<PlaceholderContainer>Select date</PlaceholderContainer>

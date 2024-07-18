@@ -60,12 +60,14 @@ export const DeleteButton = styled.button`
 
 export const Checkbox = styled.input``;
 
-export const TaskName = styled.p`
+export const TaskName = styled.p<{ $completed: boolean }>`
 	margin: 0;
 	padding: 0 5px;
 	flex-grow: 1;
 
 	font-size: 15px;
+	text-decoration: ${({ $completed }) =>
+		$completed ? 'line-through' : 'none'};
 `;
 
 export const TaskNameEditing = styled.input`
