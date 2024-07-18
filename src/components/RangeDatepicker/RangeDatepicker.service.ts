@@ -6,30 +6,42 @@ class AbstractDatepickerService {
 	private rangeStatus: boolean = false;
 
 	selectDate(date: Date) {
-		if (!this.rangeStatus) {
+		if (this.startDate && date.getTime() === this.startDate.getTime()) {
+			return;
+		}
+		if (this.endDate && date.getTime() === this.endDate.getTime()) {
+			return;
+		}
+
+		if (!this.startDate && !this.endDate) {
+			this.startDate = date;
+			this.rangeStatus = true;
+		} else if (this.startDate && !this.endDate) {
+			this.endDate = date;
+			this.rangeStatus = false;
+		} else if (!this.startDate && this.endDate) {
+			this.startDate = date;
+			this.rangeStatus = false;
+		} else if (this.startDate && this.endDate) {
 			this.startDate = date;
 			this.endDate = null;
 			this.rangeStatus = true;
-		} else {
-			if (this.startDate && date.getTime() !== this.startDate.getTime()) {
-				this.endDate = date;
-				this.rangeStatus = false;
-			}
 		}
 	}
 
 	selectStartDate(date: Date | null) {
 		this.startDate = date;
+		if (!this.endDate) this.rangeStatus = true;
 	}
 
 	selectEndDate(date: Date | null) {
 		this.endDate = date;
+		if (!this.startDate) this.rangeStatus = true;
 	}
 
 	clearStartDate() {
 		this.startDate = null;
-		this.endDate = null;
-		this.rangeStatus = false;
+		if (this.endDate) this.rangeStatus = true;
 	}
 
 	clearEndDate() {

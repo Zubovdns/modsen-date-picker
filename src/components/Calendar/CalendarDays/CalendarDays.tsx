@@ -27,17 +27,17 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 	);
 
 	const handleMouseOver = (date: Date) => {
-		if (!hashHovered && startDate && !endDate) {
+		if (!hashHovered && ((startDate && !endDate) || (!startDate && endDate))) {
 			setHashHovered(true);
 			setHoveredDate(date);
 		}
 	};
 
 	const handleMouseLeave = () => {
-		if (startDate && endDate) {
+		if ((startDate && endDate) || (!startDate && !endDate)) {
 			setHashHovered(false);
 			setHoveredDate(null);
-		} else if (startDate && !endDate) {
+		} else if ((startDate && !endDate) || (!startDate && endDate)) {
 			setHashHovered(false);
 		}
 	};
@@ -53,7 +53,7 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 					$isStartDate={isCurrentDate(dayInfo.date, startDate)}
 					$isEndDate={isCurrentDate(dayInfo.date, endDate)}
 					$isInRange={
-						!!isInRange(dayInfo.date, startDate, endDate, hoveredDate) &&
+						isInRange(dayInfo.date, startDate, endDate, hoveredDate) &&
 						(withExtraDays || !dayInfo.$isOutsideMonth)
 					}
 					$withExtraDays={withExtraDays}

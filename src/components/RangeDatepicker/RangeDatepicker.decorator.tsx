@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ComponentType, FC, useEffect, useRef, useState } from 'react';
+import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
@@ -22,16 +22,6 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 		);
 		const [endDate, setEndDate] = useState<Date | null>(null);
 
-		useEffect(() => {
-			if (calendarServiceRef.current) {
-				setStartDate(calendarServiceRef.current.getStartDate());
-				setEndDate(calendarServiceRef.current.getEndDate());
-			}
-		}, [
-			calendarServiceRef.current?.getStartDate(),
-			calendarServiceRef.current?.getEndDate(),
-		]);
-
 		const handleDateSelect = (date: Date) => {
 			calendarServiceRef.current.selectDate(date);
 			setStartDate(calendarServiceRef.current.getStartDate());
@@ -40,24 +30,29 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 
 		const handleStartDateSelect = (date: Date | null) => {
 			calendarServiceRef.current.selectStartDate(date);
-			setStartDate(calendarServiceRef.current.getEndDate());
+			setStartDate(calendarServiceRef.current.getStartDate());
 		};
 
 		const handleEndDateSelect = (date: Date | null) => {
 			calendarServiceRef.current.selectEndDate(date);
-			setEndDate(calendarServiceRef.current.getStartDate());
+			setEndDate(calendarServiceRef.current.getEndDate());
 		};
 
 		const handleClearStartDate = () => {
 			calendarServiceRef.current.clearStartDate();
 			setStartDate(calendarServiceRef.current.getStartDate());
-			setEndDate(calendarServiceRef.current.getEndDate());
 		};
 
 		const handleClearEndDate = () => {
 			calendarServiceRef.current.clearEndDate();
 			setEndDate(calendarServiceRef.current.getEndDate());
 		};
+
+		console.log(
+			calendarServiceRef.current?.getStartDate(),
+			calendarServiceRef.current?.getEndDate(),
+			calendarServiceRef.current?.getRangeStatus()
+		);
 
 		return (
 			<RangeDatepickerContainer>

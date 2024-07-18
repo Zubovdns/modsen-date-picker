@@ -4,11 +4,13 @@ export const isInRange = (
 	endDate: Date | null | undefined,
 	hoveredDate: Date | null
 ) => {
-	if (!startDate || (startDate && !hoveredDate && !endDate)) return false;
-	const end = endDate || hoveredDate;
-	if (!startDate || !end) return false;
+	if (!startDate && !endDate) return false;
 
-	const [minDate, maxDate] =
-		startDate < end ? [startDate, end] : [end, startDate];
+	const start = startDate || hoveredDate;
+	const end = endDate || hoveredDate;
+
+	if (!start || !end) return false;
+
+	const [minDate, maxDate] = start < end ? [start, end] : [end, start];
 	return date >= minDate && date <= maxDate;
 };
