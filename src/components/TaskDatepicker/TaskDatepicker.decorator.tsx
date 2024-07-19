@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType, FC, useRef, useState } from 'react';
+import { formatDateToISOString } from '@src/utils/formatDateToISOString';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CalendarProps } from '../Calendar/types';
@@ -22,7 +23,7 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 		const [tasks, setTasks] = useState<Task[]>([]);
 
 		const loadTasks = (date: Date) => {
-			const formattedDate = date.toISOString().split('T')[0];
+			const formattedDate = formatDateToISOString(date);
 			const loadedTasks = serviceRef.current.getTasks(formattedDate);
 			setTasks(loadedTasks);
 		};
@@ -35,44 +36,37 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 		const handleAddTask = () => {
 			if (!selectedDate) return;
 
-			const formattedDate = selectedDate.toISOString().split('T')[0];
+			const formattedDate = formatDateToISOString(selectedDate);
 			const newTask: Task = {
 				id: uuidv4(),
 				name: 'New task',
 				completed: false,
 			};
 			serviceRef.current.addTask(formattedDate, newTask);
-			setTasks((prevTasks) => [...prevTasks, newTask]);
+
+			// ! исправить
+			setTasks((prev) => [...prev, newTask]);
 		};
 
 		const handleRemoveTask = (taskId: string) => {
 			if (!selectedDate) return;
-			const formattedDate = selectedDate.toISOString().split('T')[0];
+			const formattedDate = formatDateToISOString(selectedDate);
 			serviceRef.current.removeTask(formattedDate, taskId);
-			setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+			loadTasks(selectedDate);
 		};
 
 		const handleToggleTaskCompletion = (taskId: string) => {
 			if (!selectedDate) return;
-			const formattedDate = selectedDate.toISOString().split('T')[0];
+			const formattedDate = formatDateToISOString(selectedDate);
 			serviceRef.current.toggleTaskCompletion(formattedDate, taskId);
-			setTasks((prevTasks) =>
-				prevTasks.map((task) =>
-					task.id === taskId ? { ...task, completed: !task.completed } : task
-				)
-			);
+			loadTasks(selectedDate);
 		};
 
 		const handleUpdateTaskText = (taskId: string, text: string) => {
 			if (!selectedDate) return;
-			const formattedDate = selectedDate.toISOString().split('T')[0];
-
+			const formattedDate = formatDateToISOString(selectedDate);
 			serviceRef.current.updateTaskText(formattedDate, taskId, text);
-			setTasks((prevTasks) =>
-				prevTasks.map((task) =>
-					task.id === taskId ? { ...task, name: text } : task
-				)
-			);
+			loadTasks(selectedDate);
 		};
 
 		return (
