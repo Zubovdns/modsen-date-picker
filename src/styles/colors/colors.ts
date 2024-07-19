@@ -12,12 +12,14 @@ export const colors = {
 	monthSelectedHoverBg: '#81B3F4',
 	monthSelectedBg: '#2F80ED',
 	monthSelectedText: '#FFF',
+	monthInRangeBg: '#E9F2FD',
 
 	yearText: '#000',
 	yearHoverBg: '#F1F1F1',
 	yearSelectedHoverBg: '#81B3F4',
 	yearSelectedBg: '#2F80ED',
 	yearSelectedText: '#FFF',
+	yearInRangeBg: '#E9F2FD',
 
 	calendarBorder: '#E1E1E1',
 	calendarBg: '#FFF',

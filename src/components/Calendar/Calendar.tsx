@@ -104,6 +104,8 @@ const Calendar: FC<
 					currentDate={currentDate}
 					onSelectMonth={handleSelectMonth}
 					selectedDate={selectedDate}
+					startDate={startDate}
+					endDate={endDate}
 				/>
 			)}
 			{view === 'years' && (
@@ -111,6 +113,8 @@ const Calendar: FC<
 					currentDate={currentDate}
 					onSelectYear={handleSelectYear}
 					selectedDate={selectedDate}
+					startDate={startDate}
+					endDate={endDate}
 				/>
 			)}
 		</CalendarContainer>
