@@ -1,5 +1,6 @@
 // TaskDatepicker.service.ts
 import { MutableRefObject, useImperativeHandle, useRef } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Task } from './types';
 
@@ -25,11 +26,16 @@ class TaskDatepickerService {
 		return this.tasks[date] || [];
 	}
 
-	addTask(date: string, task: Task) {
+	addTask(date: string) {
 		if (!this.tasks[date]) {
 			this.tasks[date] = [];
 		}
-		this.tasks[date].push(task);
+		const newTask: Task = {
+			id: uuidv4(),
+			name: 'New task',
+			completed: false,
+		};
+		this.tasks[date] = [...this.tasks[date], newTask];
 		this.saveTasksToLocalStorage();
 	}
 
@@ -71,8 +77,7 @@ export const useTaskDatepickerService = (ref: MutableRefObject<unknown>) => {
 		ref,
 		() => ({
 			getTasks: (date: string) => serviceRef.current.getTasks(date),
-			addTask: (date: string, task: Task) =>
-				serviceRef.current.addTask(date, task),
+			addTask: (date: string) => serviceRef.current.addTask(date),
 			removeTask: (date: string, taskId: string) =>
 				serviceRef.current.removeTask(date, taskId),
 			toggleTaskCompletion: (date: string, taskId: string) =>

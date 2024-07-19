@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType, FC, useRef, useState } from 'react';
 import { formatDateToISOString } from '@src/utils/formatDateToISOString';
-import { v4 as uuidv4 } from 'uuid';
 
 import { CalendarProps } from '../Calendar/types';
 import TaskList from '../TaskList';
@@ -35,17 +34,9 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 
 		const handleAddTask = () => {
 			if (!selectedDate) return;
-
 			const formattedDate = formatDateToISOString(selectedDate);
-			const newTask: Task = {
-				id: uuidv4(),
-				name: 'New task',
-				completed: false,
-			};
-			serviceRef.current.addTask(formattedDate, newTask);
-
-			// ! исправить
-			setTasks((prev) => [...prev, newTask]);
+			serviceRef.current.addTask(formattedDate);
+			loadTasks(selectedDate);
 		};
 
 		const handleRemoveTask = (taskId: string) => {

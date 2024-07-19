@@ -63,17 +63,12 @@ const TaskList: FC<TaskListProps> = ({
 		addTask();
 	};
 
-	// ! костыль
-	const uniqueTasks = Array.from(
-		new Map(tasks.map((task) => [task.id, task])).values()
-	);
-
 	return (
 		<TaskListContainer>
 			{selectedDate ? (
 				<>
 					<List>
-						{uniqueTasks.map((task) => (
+						{tasks.map((task) => (
 							<Task key={task.id}>
 								<Checkbox
 									type='checkbox'
