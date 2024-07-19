@@ -7,9 +7,17 @@ export const colors = {
 	dateSelectedText: '#FFF',
 	dateSelectedBg: '#2F80ED',
 
+	monthText: '#000',
 	monthHoverBg: '#F1F1F1',
+	monthSelectedHoverBg: '#81B3F4',
+	monthSelectedBg: '#2F80ED',
+	monthSelectedText: '#FFF',
 
+	yearText: '#000',
 	yearHoverBg: '#F1F1F1',
+	yearSelectedHoverBg: '#81B3F4',
+	yearSelectedBg: '#2F80ED',
+	yearSelectedText: '#FFF',
 
 	calendarBorder: '#E1E1E1',
 	calendarBg: '#FFF',

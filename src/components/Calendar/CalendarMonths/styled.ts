@@ -7,7 +7,7 @@ export const Months = styled.div`
 	gap: 20px;
 `;
 
-export const Month = styled.div`
+export const Month = styled.div<{ $selected: boolean }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -17,7 +17,13 @@ export const Month = styled.div`
 
 	transition: background-color 0.1s ease;
 
+	background-color: ${({ $selected }) =>
+		$selected ? colors.monthSelectedBg : 'transparent'};
+	color: ${({ $selected }) =>
+		$selected ? colors.monthSelectedText : colors.monthText};
+
 	&:hover {
-		background-color: ${colors.monthHoverBg};
+		background-color: ${({ $selected }) =>
+			$selected ? colors.monthSelectedHoverBg : colors.monthHoverBg};
 	}
 `;
