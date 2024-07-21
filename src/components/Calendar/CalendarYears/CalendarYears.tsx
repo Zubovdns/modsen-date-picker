@@ -1,4 +1,6 @@
 import { FC } from 'react';
+import { isInRangeYear } from '@src/utils/insInRangeYear';
+import { isSelectedYear } from '@src/utils/isSelectedYear';
 
 import { Year, Years } from './styled';
 import { CalendarYearsProps } from './types';
@@ -15,28 +17,14 @@ const CalendarYears: FC<CalendarYearsProps> = ({
 		(_, i) => currentDate.getFullYear() - 17 + i
 	);
 
-	const isSelected = (year: number) =>
-		selectedDate?.getFullYear() === year ||
-		startDate?.getFullYear() === year ||
-		endDate?.getFullYear() === year;
-
-	const isInRange = (year: number) => {
-		if (!startDate || !endDate) return false;
-
-		const startYear = startDate.getFullYear();
-		const endYear = endDate.getFullYear();
-
-		return year > startYear && year < endYear;
-	};
-
 	return (
 		<Years>
 			{years.map((year) => (
 				<Year
 					key={year}
 					onClick={() => onSelectYear(year)}
-					$selected={isSelected(year)}
-					$inRange={isInRange(year)}
+					$selected={isSelectedYear(year, selectedDate, startDate, endDate)}
+					$inRange={isInRangeYear(year, startDate, endDate)}
 				>
 					{year}
 				</Year>
