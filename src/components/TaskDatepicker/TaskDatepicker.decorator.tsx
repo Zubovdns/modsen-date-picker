@@ -3,6 +3,7 @@ import { ComponentType, FC, useRef, useState } from 'react';
 import { formatDateToISOString } from '@src/utils/formatDateToISOString';
 
 import { CalendarProps } from '../Calendar/types';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import TaskList from '../TaskList';
 
 import { TaskDatepickerContainer } from './styled';
@@ -61,21 +62,23 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 		};
 
 		return (
-			<TaskDatepickerContainer>
-				<WrappedComponent
-					{...(props as P)}
-					onDateSelect={handleDateSelect}
-					selectedDate={selectedDate}
-				/>
-				<TaskList
-					tasks={tasks}
-					addTask={handleAddTask}
-					removeTask={handleRemoveTask}
-					toggleTaskCompletion={handleToggleTaskCompletion}
-					updateTaskText={handleUpdateTaskText}
-					selectedDate={selectedDate}
-				/>
-			</TaskDatepickerContainer>
+			<ErrorBoundary>
+				<TaskDatepickerContainer>
+					<WrappedComponent
+						{...(props as P)}
+						onDateSelect={handleDateSelect}
+						selectedDate={selectedDate}
+					/>
+					<TaskList
+						tasks={tasks}
+						addTask={handleAddTask}
+						removeTask={handleRemoveTask}
+						toggleTaskCompletion={handleToggleTaskCompletion}
+						updateTaskText={handleUpdateTaskText}
+						selectedDate={selectedDate}
+					/>
+				</TaskDatepickerContainer>
+			</ErrorBoundary>
 		);
 	};
 

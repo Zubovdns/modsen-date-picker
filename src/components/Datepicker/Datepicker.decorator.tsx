@@ -3,6 +3,7 @@ import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 import { useDatepickerService } from './Datepicker.service';
 import { DatepickerContainer } from './styled';
@@ -34,19 +35,21 @@ const withDatepickerService = <P extends CalendarProps>(
 		};
 
 		return (
-			<DatepickerContainer>
-				<DateInput
-					label='Date'
-					value={selectedDate}
-					onChange={handleDateSelect}
-					onClear={handleClear}
-				/>
-				<WrappedComponent
-					{...(props as P)}
-					selectedDate={selectedDate}
-					onDateSelect={handleDateSelect}
-				/>
-			</DatepickerContainer>
+			<ErrorBoundary>
+				<DatepickerContainer>
+					<DateInput
+						label='Date'
+						value={selectedDate}
+						onChange={handleDateSelect}
+						onClear={handleClear}
+					/>
+					<WrappedComponent
+						{...(props as P)}
+						selectedDate={selectedDate}
+						onDateSelect={handleDateSelect}
+					/>
+				</DatepickerContainer>
+			</ErrorBoundary>
 		);
 	};
 

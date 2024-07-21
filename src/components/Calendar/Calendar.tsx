@@ -4,6 +4,7 @@ import Prev from '@assets/icons/Calendar/Prev';
 import { monthNames } from '@constants/dates';
 
 import { WithDatepickerServiceProps } from '../Datepicker/types';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import { WithRangeDatepickerServiceProps } from '../RangeDatepicker/types';
 import { WithTaskDatepickerServiceProps } from '../TaskDatepicker/types';
 
@@ -69,59 +70,61 @@ const Calendar: FC<
 	};
 
 	return (
-		<CalendarContainer>
-			<Header>
+		<ErrorBoundary>
+			<CalendarContainer>
+				<Header>
+					{view === 'days' && (
+						<Button onClick={handlePrevMonth}>
+							<Prev />
+						</Button>
+					)}
+					<HeaderTitle onClick={handleHeaderClick}>
+						{view === 'days' &&
+							`${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
+						{view === 'months' && currentDate.getFullYear()}
+						{view === 'years' && 'Back'}
+					</HeaderTitle>
+					{view === 'days' && (
+						<Button onClick={handleNextMonth}>
+							<Next />
+						</Button>
+					)}
+				</Header>
 				{view === 'days' && (
-					<Button onClick={handlePrevMonth}>
-						<Prev />
-					</Button>
+					<>
+						<CalendarWeekDays startDayOfWeek={startDayOfWeek} />
+						<CalendarDays
+							currentDate={currentDate}
+							startDayOfWeek={startDayOfWeek}
+							withExtraDays={withExtraDays}
+							withHolidays={withHolidays}
+							onSelectDate={onDateSelect}
+							selectedDate={selectedDate}
+							startDate={startDate}
+							endDate={endDate}
+						/>
+					</>
 				)}
-				<HeaderTitle onClick={handleHeaderClick}>
-					{view === 'days' &&
-						`${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
-					{view === 'months' && currentDate.getFullYear()}
-					{view === 'years' && 'Back'}
-				</HeaderTitle>
-				{view === 'days' && (
-					<Button onClick={handleNextMonth}>
-						<Next />
-					</Button>
-				)}
-			</Header>
-			{view === 'days' && (
-				<>
-					<CalendarWeekDays startDayOfWeek={startDayOfWeek} />
-					<CalendarDays
+				{view === 'months' && (
+					<CalendarMonths
 						currentDate={currentDate}
-						startDayOfWeek={startDayOfWeek}
-						withExtraDays={withExtraDays}
-						withHolidays={withHolidays}
-						onSelectDate={onDateSelect}
+						onSelectMonth={handleSelectMonth}
 						selectedDate={selectedDate}
 						startDate={startDate}
 						endDate={endDate}
 					/>
-				</>
-			)}
-			{view === 'months' && (
-				<CalendarMonths
-					currentDate={currentDate}
-					onSelectMonth={handleSelectMonth}
-					selectedDate={selectedDate}
-					startDate={startDate}
-					endDate={endDate}
-				/>
-			)}
-			{view === 'years' && (
-				<CalendarYears
-					currentDate={currentDate}
-					onSelectYear={handleSelectYear}
-					selectedDate={selectedDate}
-					startDate={startDate}
-					endDate={endDate}
-				/>
-			)}
-		</CalendarContainer>
+				)}
+				{view === 'years' && (
+					<CalendarYears
+						currentDate={currentDate}
+						onSelectYear={handleSelectYear}
+						selectedDate={selectedDate}
+						startDate={startDate}
+						endDate={endDate}
+					/>
+				)}
+			</CalendarContainer>
+		</ErrorBoundary>
 	);
 };
 

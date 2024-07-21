@@ -3,6 +3,7 @@ import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 import { useRangeDatepickerService } from './RangeDatepicker.service';
 import { RangeDatepickerContainer } from './styled';
@@ -49,26 +50,28 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 		};
 
 		return (
-			<RangeDatepickerContainer>
-				<DateInput
-					label='From'
-					value={startDate}
-					onChange={handleStartDateSelect}
-					onClear={handleClearStartDate}
-				/>
-				<DateInput
-					label='To'
-					value={endDate}
-					onChange={handleEndDateSelect}
-					onClear={handleClearEndDate}
-				/>
-				<WrappedComponent
-					{...(props as P)}
-					startDate={startDate}
-					endDate={endDate}
-					onDateSelect={handleDateSelect}
-				/>
-			</RangeDatepickerContainer>
+			<ErrorBoundary>
+				<RangeDatepickerContainer>
+					<DateInput
+						label='From'
+						value={startDate}
+						onChange={handleStartDateSelect}
+						onClear={handleClearStartDate}
+					/>
+					<DateInput
+						label='To'
+						value={endDate}
+						onChange={handleEndDateSelect}
+						onClear={handleClearEndDate}
+					/>
+					<WrappedComponent
+						{...(props as P)}
+						startDate={startDate}
+						endDate={endDate}
+						onDateSelect={handleDateSelect}
+					/>
+				</RangeDatepickerContainer>
+			</ErrorBoundary>
 		);
 	};
 
