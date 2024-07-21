@@ -71,18 +71,22 @@ const Calendar: FC<
 	return (
 		<CalendarContainer>
 			<Header>
-				<Button onClick={handlePrevMonth}>
-					<Prev />
-				</Button>
+				{view === 'days' && (
+					<Button onClick={handlePrevMonth}>
+						<Prev />
+					</Button>
+				)}
 				<HeaderTitle onClick={handleHeaderClick}>
 					{view === 'days' &&
 						`${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
 					{view === 'months' && currentDate.getFullYear()}
 					{view === 'years' && 'Back'}
 				</HeaderTitle>
-				<Button onClick={handleNextMonth}>
-					<Next />
-				</Button>
+				{view === 'days' && (
+					<Button onClick={handleNextMonth}>
+						<Next />
+					</Button>
+				)}
 			</Header>
 			{view === 'days' && (
 				<>
