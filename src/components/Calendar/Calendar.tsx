@@ -5,6 +5,7 @@ import { monthNames } from '@constants/dates';
 
 import { WithDatepickerServiceProps } from '../Datepicker/types';
 import { WithRangeDatepickerServiceProps } from '../RangeDatepicker/types';
+import { WithTaskDatepickerServiceProps } from '../TaskDatepicker/types';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
@@ -15,7 +16,11 @@ import { CalendarProps } from './types';
 
 const Calendar: FC<
 	CalendarProps &
-		Partial<WithDatepickerServiceProps & WithRangeDatepickerServiceProps>
+		Partial<
+			WithDatepickerServiceProps &
+				WithRangeDatepickerServiceProps &
+				WithTaskDatepickerServiceProps
+		>
 > = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
@@ -66,18 +71,22 @@ const Calendar: FC<
 	return (
 		<CalendarContainer>
 			<Header>
-				<Button onClick={handlePrevMonth}>
-					<Prev />
-				</Button>
+				{view === 'days' && (
+					<Button onClick={handlePrevMonth}>
+						<Prev />
+					</Button>
+				)}
 				<HeaderTitle onClick={handleHeaderClick}>
 					{view === 'days' &&
 						`${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`}
 					{view === 'months' && currentDate.getFullYear()}
 					{view === 'years' && 'Back'}
 				</HeaderTitle>
-				<Button onClick={handleNextMonth}>
-					<Next />
-				</Button>
+				{view === 'days' && (
+					<Button onClick={handleNextMonth}>
+						<Next />
+					</Button>
+				)}
 			</Header>
 			{view === 'days' && (
 				<>
@@ -95,12 +104,21 @@ const Calendar: FC<
 				</>
 			)}
 			{view === 'months' && (
-				<CalendarMonths onSelectMonth={handleSelectMonth} />
+				<CalendarMonths
+					currentDate={currentDate}
+					onSelectMonth={handleSelectMonth}
+					selectedDate={selectedDate}
+					startDate={startDate}
+					endDate={endDate}
+				/>
 			)}
 			{view === 'years' && (
 				<CalendarYears
-					startYear={currentDate.getFullYear() - 15}
+					currentDate={currentDate}
 					onSelectYear={handleSelectYear}
+					selectedDate={selectedDate}
+					startDate={startDate}
+					endDate={endDate}
 				/>
 			)}
 		</CalendarContainer>

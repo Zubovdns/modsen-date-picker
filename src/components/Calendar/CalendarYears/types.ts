@@ -1,4 +1,7 @@
 export type CalendarYearsProps = {
-	startYear: number;
+	currentDate: Date;
 	onSelectYear: (year: number) => void;
+	selectedDate?: Date | null;
+	startDate?: Date | null;
+	endDate?: Date | null;
 };

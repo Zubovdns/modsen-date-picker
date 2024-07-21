@@ -48,12 +48,6 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 			setEndDate(calendarServiceRef.current.getEndDate());
 		};
 
-		console.log(
-			calendarServiceRef.current?.getStartDate(),
-			calendarServiceRef.current?.getEndDate(),
-			calendarServiceRef.current?.getRangeStatus()
-		);
-
 		return (
 			<RangeDatepickerContainer>
 				<DateInput

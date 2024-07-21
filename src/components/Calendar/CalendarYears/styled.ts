@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import colors from '@styles/colors';
 import styled from 'styled-components';
 
@@ -9,7 +10,7 @@ export const Years = styled.div`
 	overflow: auto;
 `;
 
-export const Year = styled.div`
+export const Year = styled.div<{ $selected: boolean; $inRange: boolean }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -19,7 +20,17 @@ export const Year = styled.div`
 
 	transition: background-color 0.1s ease;
 
+	background-color: ${({ $selected, $inRange }) =>
+		$selected
+			? colors.yearSelectedBg
+			: $inRange
+				? colors.yearInRangeBg
+				: 'transparent'};
+	color: ${({ $selected }) =>
+		$selected ? colors.yearSelectedText : colors.yearText};
+
 	&:hover {
-		background-color: ${colors.yearHoverBg};
+		background-color: ${({ $selected }) =>
+			$selected ? colors.yearSelectedHoverBg : colors.yearHoverBg};
 	}
 `;

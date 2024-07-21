@@ -12,8 +12,9 @@ export const CalendarContainer = styled.div`
 
 export const Header = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	position: relative;
 	margin-bottom: 10px;
 	font-weight: bold;
 `;
@@ -35,10 +36,21 @@ export const Button = styled.button`
 	cursor: pointer;
 	font-size: 18px;
 	border-radius: 8px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
 
 	transition: background-color 0.1s ease;
 
 	&:hover {
 		background-color: ${colors.calendarHoverButtonBg};
+	}
+
+	&:first-child {
+		left: 0;
+	}
+
+	&:last-child {
+		right: 0;
 	}
 `;
