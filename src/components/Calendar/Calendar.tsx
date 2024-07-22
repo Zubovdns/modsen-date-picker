@@ -74,7 +74,7 @@ const Calendar: FC<
 			<CalendarContainer>
 				<Header>
 					{view === 'days' && (
-						<Button onClick={handlePrevMonth}>
+						<Button onClick={handlePrevMonth} aria-label='Prev'>
 							<Prev />
 						</Button>
 					)}
@@ -85,7 +85,7 @@ const Calendar: FC<
 						{view === 'years' && 'Back'}
 					</HeaderTitle>
 					{view === 'days' && (
-						<Button onClick={handleNextMonth}>
+						<Button onClick={handleNextMonth} aria-label='Next'>
 							<Next />
 						</Button>
 					)}

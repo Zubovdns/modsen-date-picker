@@ -1,7 +1,7 @@
 import Calendar from '../Calendar';
 
-import withTaskDatepickerService from './TaskDatepicker.decorator';
+import withTaskDatepicker from './TaskDatepicker.decorator';
 
-const TaskDatepicker = withTaskDatepickerService(Calendar);
+const TaskDatepicker = withTaskDatepicker(Calendar);
 
 export default TaskDatepicker;

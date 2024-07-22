@@ -1,7 +1,7 @@
 import Calendar from '../Calendar';
 
-import withRangeDatepickerService from './RangeDatepicker.decorator';
+import withRangeDatepicker from './RangeDatepicker.decorator';
 
-const RangeDatepicker = withRangeDatepickerService(Calendar);
+const RangeDatepicker = withRangeDatepicker(Calendar);
 
 export default RangeDatepicker;

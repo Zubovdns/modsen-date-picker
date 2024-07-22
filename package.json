@@ -16,7 +16,9 @@
 		"build:lib": "rollup -c",
 		"sb": "storybook dev -p 6006",
 		"build:sb": "storybook build",
-		"test:jest": "jest --coverage"
+		"test:utils": "jest --config jest.utils.config.js",
+		"test:components": "jest --config jest.components.config.js",
+		"test": "yarn test:utils && yarn test:components"
 	},
 	"devDependencies": {
 		"@babel/plugin-transform-runtime": "^7.24.7",
