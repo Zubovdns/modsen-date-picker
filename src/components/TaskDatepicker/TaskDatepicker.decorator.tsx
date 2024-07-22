@@ -10,7 +10,7 @@ import { TaskDatepickerContainer } from './styled';
 import { useTaskDatepickerService } from './TaskDatepicker.service';
 import { Task, WithTaskDatepickerServiceProps } from './types';
 
-const withTaskDatepickerService = <P extends CalendarProps>(
+const withTaskDatepicker = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
 ): FC<Omit<P, keyof WithTaskDatepickerServiceProps>> => {
 	const WithTaskDatepickerService: FC<
@@ -63,7 +63,7 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 
 		return (
 			<ErrorBoundary>
-				<TaskDatepickerContainer>
+				<TaskDatepickerContainer aria-label='task-datepicker-wrapper'>
 					<WrappedComponent
 						{...(props as P)}
 						onDateSelect={handleDateSelect}
@@ -85,4 +85,4 @@ const withTaskDatepickerService = <P extends CalendarProps>(
 	return WithTaskDatepickerService;
 };
 
-export default withTaskDatepickerService;
+export default withTaskDatepicker;

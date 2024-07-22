@@ -36,7 +36,7 @@ const withDatepickerService = <P extends CalendarProps>(
 
 		return (
 			<ErrorBoundary>
-				<DatepickerContainer>
+				<DatepickerContainer aria-label='datepicker-wrapper'>
 					<DateInput
 						label='Date'
 						value={selectedDate}

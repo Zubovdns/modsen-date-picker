@@ -9,7 +9,7 @@ import { useRangeDatepickerService } from './RangeDatepicker.service';
 import { RangeDatepickerContainer } from './styled';
 import { WithRangeDatepickerServiceProps } from './types';
 
-const withRangeDatepickerService = <P extends CalendarProps>(
+const withRangeDatepicker = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
 ): FC<Omit<P, keyof WithRangeDatepickerServiceProps>> => {
 	const WithRangeDatepickerService: FC<
@@ -51,7 +51,7 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 
 		return (
 			<ErrorBoundary>
-				<RangeDatepickerContainer>
+				<RangeDatepickerContainer aria-label='range-datepicker-wrapper'>
 					<DateInput
 						label='From'
 						value={startDate}
@@ -78,4 +78,4 @@ const withRangeDatepickerService = <P extends CalendarProps>(
 	return WithRangeDatepickerService;
 };
 
-export default withRangeDatepickerService;
+export default withRangeDatepicker;

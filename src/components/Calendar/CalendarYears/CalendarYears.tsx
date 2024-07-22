@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { isInRangeYear } from '@src/utils/insInRangeYear';
+import { isInRangeYear } from '@src/utils/isInRangeYear';
 import { isSelectedYear } from '@src/utils/isSelectedYear';
 
 import { Year, Years } from './styled';
