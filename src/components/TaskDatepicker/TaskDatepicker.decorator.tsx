@@ -3,7 +3,7 @@ import { ComponentType, FC, useRef, useState } from 'react';
 import { formatDateToISOString } from '@src/utils/formatDateToISOString';
 
 import { CalendarProps } from '../Calendar/types';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary';
 import TaskList from '../TaskList';
 
 import { TaskDatepickerContainer } from './styled';

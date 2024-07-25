@@ -3,7 +3,7 @@ import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 import { useRangeDatepickerService } from './RangeDatepicker.service';
 import { RangeDatepickerContainer } from './styled';
