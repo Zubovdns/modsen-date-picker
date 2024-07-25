@@ -18,13 +18,13 @@ jobs:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build project
-        run: npm run build
+        run: yarn build:sb
 
       - name: Install Netlify CLI
-        run: npm install -g netlify-cli
+        run: yarn add -g netlify-cli
 
       - name: Deploy to Netlify
         run: netlify deploy --prod --dir=build --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
