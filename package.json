@@ -1,6 +1,6 @@
 {
 	"name": "@zubovdns/modsen-datepicker",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"license": "MIT",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
