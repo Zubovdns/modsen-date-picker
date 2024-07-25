@@ -2,6 +2,7 @@ import alias from '@rollup/plugin-alias';
 import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import eslint from '@rollup/plugin-eslint';
+import json from '@rollup/plugin-json'; // Импортируем плагин JSON
 import resolve, { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
@@ -72,6 +73,7 @@ export default [
 				entries: [{ find: 'src', replacement: path.resolve(__dirname, 'src') }],
 				resolve: customResolver,
 			}),
+			json(),
 		],
 		external: ['react', 'react-dom', 'styled-components'],
 	},
