@@ -3,10 +3,7 @@ import Next from '@assets/icons/Calendar/Next';
 import Prev from '@assets/icons/Calendar/Prev';
 import { monthNames } from '@constants/dates';
 
-import { WithDatepickerServiceProps } from '../Datepicker/types';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
-import { WithRangeDatepickerServiceProps } from '../RangeDatepicker/types';
-import { WithTaskDatepickerServiceProps } from '../TaskDatepicker/types';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
@@ -15,14 +12,7 @@ import CalendarYears from './CalendarYears';
 import { Button, CalendarContainer, Header, HeaderTitle } from './styled';
 import { CalendarProps } from './types';
 
-const Calendar: FC<
-	CalendarProps &
-		Partial<
-			WithDatepickerServiceProps &
-				WithRangeDatepickerServiceProps &
-				WithTaskDatepickerServiceProps
-		>
-> = ({
+const Calendar: FC<CalendarProps> = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
 	withExtraDays = false,
