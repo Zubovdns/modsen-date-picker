@@ -10,7 +10,7 @@ const CalendarWeekDays: FC<CalendarWeekDaysProps> = ({ startDayOfWeek }) => {
 	return (
 		<Weekdays>
 			{weekDays.map((day, index) => (
-				<Weekday key={index}>{day}</Weekday>
+				<Weekday key={'weekday_$' + index}>{day}</Weekday>
 			))}
 		</Weekdays>
 	);

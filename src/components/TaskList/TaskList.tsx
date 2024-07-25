@@ -87,7 +87,7 @@ const TaskList: FC<TaskListProps> = ({
 								) : (
 									<TaskName
 										$completed={task.completed}
-										onDoubleClick={() => handleEditTask(task.id, task.name)}
+										onClick={() => handleEditTask(task.id, task.name)}
 									>
 										{task.name}
 									</TaskName>

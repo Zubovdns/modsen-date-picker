@@ -1,4 +1,5 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { fetchHolidays, Holiday } from '@src/api/fetchHolidays';
 import { getDays } from '@utils/getDays';
 import { isCurrentDate } from '@utils/isCurrentDate';
 import { isInRange } from '@utils/isInRange';
@@ -10,6 +11,7 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 	currentDate,
 	startDayOfWeek,
 	withExtraDays,
+	withWeekends,
 	withHolidays,
 	onSelectDate,
 	selectedDate,
@@ -18,12 +20,31 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 }) => {
 	const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
 	const [hashHovered, setHashHovered] = useState<boolean>(false);
+	const [holidays, setHolidays] = useState<Holiday[]>([]);
+
+	useEffect(() => {
+		const getHolidays = async () => {
+			try {
+				const data = await fetchHolidays(currentDate);
+				setHolidays(data);
+			} catch (err) {
+				console.error('Ошибка при получении данных');
+				setHolidays([]);
+			}
+		};
+
+		if (withHolidays) {
+			getHolidays();
+		}
+	}, [currentDate]);
 
 	const days = getDays(
 		currentDate,
 		startDayOfWeek,
 		withExtraDays,
-		withHolidays
+		withWeekends,
+		withHolidays,
+		holidays
 	);
 
 	const handleMouseOver = (date: Date) => {
@@ -47,18 +68,19 @@ const CalendarDays: FC<CalendarDaysProps> = ({
 			{days.map((dayInfo) => (
 				<Day
 					key={dayInfo.key}
-					$isOutsideMonth={dayInfo.$isOutsideMonth}
-					$holiday={dayInfo.$holiday}
+					$isOutsideMonth={dayInfo.isOutsideMonth}
+					$weekend={dayInfo.weekend}
+					$holiday={dayInfo.holiday}
 					$isSelected={isCurrentDate(dayInfo.date, selectedDate)}
 					$isStartDate={isCurrentDate(dayInfo.date, startDate)}
 					$isEndDate={isCurrentDate(dayInfo.date, endDate)}
 					$isInRange={
 						isInRange(dayInfo.date, startDate, endDate, hoveredDate) &&
-						(withExtraDays || !dayInfo.$isOutsideMonth)
+						(withExtraDays || !dayInfo.isOutsideMonth)
 					}
 					$withExtraDays={withExtraDays}
 					onClick={() =>
-						(dayInfo.$isOutsideMonth ? withExtraDays : true) &&
+						(dayInfo.isOutsideMonth ? withExtraDays : true) &&
 						onSelectDate &&
 						onSelectDate(dayInfo.date)
 					}

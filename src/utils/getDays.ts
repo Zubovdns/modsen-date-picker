@@ -1,4 +1,4 @@
-/* eslint-disable no-nested-ternary */
+import { Holiday } from '@src/api/fetchHolidays';
 import { v4 as uuidv4 } from 'uuid';
 
 const getDaysInMonth = (date: Date) =>
@@ -7,9 +7,14 @@ const getDaysInMonth = (date: Date) =>
 const getFirstDayOfMonth = (
 	date: Date,
 	startDayOfWeek: 'sunday' | 'monday'
-) => {
+): number => {
 	const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-	return startDayOfWeek === 'sunday' ? day : day === 0 ? 6 : day - 1;
+
+	if (startDayOfWeek === 'sunday') {
+		return day;
+	}
+
+	return day === 0 ? 6 : day - 1;
 };
 
 const isHoliday = (date: Date) => {
@@ -17,11 +22,27 @@ const isHoliday = (date: Date) => {
 	return day === 0 || day === 6;
 };
 
+const isDateEqual = (date1: Date, date2: Date): boolean =>
+	date1.getFullYear() === date2.getFullYear() &&
+	date1.getMonth() === date2.getMonth() &&
+	date1.getDate() === date2.getDate();
+
+const isDateInHolidays = (date: Date, holidays: Holiday[]): boolean =>
+	holidays.some((holiday) => {
+		const holidayStartDate = new Date(holiday.startDate);
+		const holidayEndDate = new Date(holiday.endDate);
+		return (
+			isDateEqual(date, holidayStartDate) || isDateEqual(date, holidayEndDate)
+		);
+	});
+
 export const getDays = (
 	currentDate: Date,
 	startDayOfWeek: 'monday' | 'sunday',
 	withExtraDays: boolean,
-	withHolidays: boolean
+	withWeekends: boolean,
+	withHolidays: boolean,
+	holidays: Holiday[]
 ) => {
 	const daysInMonth = getDaysInMonth(currentDate);
 	const firstDay = getFirstDayOfMonth(currentDate, startDayOfWeek);
@@ -44,8 +65,11 @@ export const getDays = (
 			key: uuidv4(),
 			day: withExtraDays ? prevMonthDays - firstDay + 1 + i : null,
 			date,
-			$isOutsideMonth: true,
-			$holiday: withExtraDays ? withHolidays && isHoliday(date) : false,
+			isOutsideMonth: true,
+			weekend: withExtraDays ? withWeekends && isHoliday(date) : false,
+			holiday: withExtraDays
+				? withHolidays && isDateInHolidays(date, holidays)
+				: false,
 		});
 	}
 
@@ -59,8 +83,9 @@ export const getDays = (
 			key: uuidv4(),
 			day: day,
 			date,
-			$isOutsideMonth: false,
-			$holiday: withHolidays && isHoliday(date),
+			isOutsideMonth: false,
+			weekend: withWeekends && isHoliday(date),
+			holiday: withHolidays && isDateInHolidays(date, holidays),
 		});
 	}
 
@@ -76,8 +101,9 @@ export const getDays = (
 					key: uuidv4(),
 					day: i,
 					date,
-					$isOutsideMonth: true,
-					$holiday: withHolidays && isHoliday(date),
+					isOutsideMonth: true,
+					weekend: withWeekends && isHoliday(date),
+					holiday: withHolidays && isDateInHolidays(date, holidays),
 				});
 			}
 		}

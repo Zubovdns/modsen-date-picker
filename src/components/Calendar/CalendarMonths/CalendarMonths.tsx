@@ -16,7 +16,7 @@ const CalendarMonths: FC<CalendarMonthsProps> = ({
 	<Months>
 		{monthNames.map((month, index) => (
 			<Month
-				key={index}
+				key={'month_$' + index}
 				onClick={() => onSelectMonth(index)}
 				$selected={isSelectedMonth(
 					index,
