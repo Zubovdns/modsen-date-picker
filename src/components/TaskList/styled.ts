@@ -68,6 +68,8 @@ export const TaskName = styled.p<{ $completed: boolean }>`
 	font-size: 15px;
 	text-decoration: ${({ $completed }) =>
 		$completed ? 'line-through' : 'none'};
+
+	cursor: text;
 `;
 
 export const TaskNameEditing = styled.input`
