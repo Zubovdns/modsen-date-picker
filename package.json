@@ -18,7 +18,8 @@
 		"build:sb": "storybook build",
 		"test:utils": "jest --config jest.utils.config.js",
 		"test:components": "jest --config jest.components.config.js",
-		"test": "yarn test:utils && yarn test:components"
+		"test": "yarn test:utils && yarn test:components",
+		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
 	},
 	"devDependencies": {
 		"@babel/plugin-transform-runtime": "^7.24.7",
