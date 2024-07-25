@@ -3,7 +3,7 @@ import Next from '@assets/icons/Calendar/Next';
 import Prev from '@assets/icons/Calendar/Prev';
 import { monthNames } from '@constants/dates';
 
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 import CalendarDays from './CalendarDays';
 import CalendarMonths from './CalendarMonths';
