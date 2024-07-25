@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import colors from '@styles/colors';
 import styled from 'styled-components';
 
@@ -15,20 +14,33 @@ export const Month = styled.div<{ $selected: boolean; $inRange: boolean }>`
 	height: 40px;
 	border-radius: 8px;
 	cursor: pointer;
-
 	transition: background-color 0.1s ease;
 
-	background-color: ${({ $selected, $inRange }) =>
-		$selected
-			? colors.monthSelectedBg
-			: $inRange
-				? colors.monthInRangeBg
-				: 'transparent'};
-	color: ${({ $selected }) =>
-		$selected ? colors.monthSelectedText : colors.monthText};
+	background-color: ${({ $selected, $inRange }) => {
+		if ($selected) {
+			return colors.monthSelectedBg;
+		} else if ($inRange) {
+			return colors.monthInRangeBg;
+		} else {
+			return 'transparent';
+		}
+	}};
+
+	color: ${({ $selected }) => {
+		if ($selected) {
+			return colors.monthSelectedText;
+		} else {
+			return colors.monthText;
+		}
+	}};
 
 	&:hover {
-		background-color: ${({ $selected }) =>
-			$selected ? colors.monthSelectedHoverBg : colors.monthHoverBg};
+		background-color: ${({ $selected }) => {
+			if ($selected) {
+				return colors.monthSelectedHoverBg;
+			} else {
+				return colors.monthHoverBg;
+			}
+		}};
 	}
 `;

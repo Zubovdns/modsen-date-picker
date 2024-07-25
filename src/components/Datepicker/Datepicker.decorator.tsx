@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType, FC, useRef, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
@@ -7,7 +6,10 @@ import { ErrorBoundary } from '../ErrorBoundary';
 
 import { useDatepickerService } from './Datepicker.service';
 import { DatepickerContainer } from './styled';
-import { WithDatepickerServiceProps } from './types';
+import {
+	DatepickerServiceInterface,
+	WithDatepickerServiceProps,
+} from './types';
 
 const withDatepickerService = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
@@ -15,7 +17,7 @@ const withDatepickerService = <P extends CalendarProps>(
 	const WithDatepickerService: FC<Omit<P, keyof WithDatepickerServiceProps>> = (
 		props
 	) => {
-		const calendarServiceRef = useRef<any>(null);
+		const calendarServiceRef = useRef<DatepickerServiceInterface>(null!);
 		useDatepickerService(calendarServiceRef);
 
 		const [selectedDate, setSelectedDate] = useState<Date | null>(

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ComponentType, FC, useRef, useState } from 'react';
 import { formatDateToISOString } from '@src/utils/formatDateToISOString';
 
@@ -8,7 +7,11 @@ import TaskList from '../TaskList';
 
 import { TaskDatepickerContainer } from './styled';
 import { useTaskDatepickerService } from './TaskDatepicker.service';
-import { Task, WithTaskDatepickerServiceProps } from './types';
+import {
+	Task,
+	TaskDatepickerServiceInterface,
+	WithTaskDatepickerServiceProps,
+} from './types';
 
 const withTaskDatepicker = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
@@ -16,7 +19,7 @@ const withTaskDatepicker = <P extends CalendarProps>(
 	const WithTaskDatepickerService: FC<
 		Omit<P, keyof WithTaskDatepickerServiceProps>
 	> = (props) => {
-		const serviceRef = useRef<any>(null);
+		const serviceRef = useRef<TaskDatepickerServiceInterface>(null!);
 		useTaskDatepickerService(serviceRef);
 
 		const [selectedDate, setSelectedDate] = useState<Date | null>(null);

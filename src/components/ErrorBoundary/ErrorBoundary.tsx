@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { Component } from 'react';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from './types';
@@ -9,7 +8,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 		this.state = { hasError: false };
 	}
 
-	static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+	static getDerivedStateFromError(): ErrorBoundaryState {
 		return { hasError: true };
 	}
 

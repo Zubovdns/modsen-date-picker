@@ -1,5 +1,7 @@
 import { MutableRefObject, useImperativeHandle, useRef } from 'react';
 
+import { RangeDatepickerServiceInterface } from './types';
+
 class AbstractDatepickerService {
 	private startDate: Date | null = null;
 	private endDate: Date | null = null;
@@ -62,7 +64,7 @@ class AbstractDatepickerService {
 	}
 }
 
-class RangeDatepickerService {
+class RangeDatepickerService implements RangeDatepickerServiceInterface {
 	private datepickerService = new AbstractDatepickerService();
 
 	selectDate(date: Date) {
@@ -98,7 +100,9 @@ class RangeDatepickerService {
 	}
 }
 
-export const useRangeDatepickerService = (ref: MutableRefObject<unknown>) => {
+export const useRangeDatepickerService = (
+	ref: MutableRefObject<RangeDatepickerServiceInterface | null>
+) => {
 	const decorator = useRef(new RangeDatepickerService());
 
 	useImperativeHandle(

@@ -1,5 +1,7 @@
 import { MutableRefObject, useImperativeHandle, useRef } from 'react';
 
+import { DatepickerServiceInterface } from './types';
+
 class AbstractDatepickerService {
 	private selectedDate: Date | null = null;
 
@@ -16,7 +18,7 @@ class AbstractDatepickerService {
 	}
 }
 
-class DatepickerService {
+class DatepickerService implements DatepickerServiceInterface {
 	private datepickerService = new AbstractDatepickerService();
 
 	selectDate(date: Date) {
@@ -32,8 +34,10 @@ class DatepickerService {
 	}
 }
 
-export const useDatepickerService = (ref: MutableRefObject<unknown>) => {
-	const decorator = useRef(new DatepickerService());
+export const useDatepickerService = (
+	ref: MutableRefObject<DatepickerServiceInterface | null>
+) => {
+	const decorator = useRef<DatepickerServiceInterface>(new DatepickerService());
 
 	useImperativeHandle(
 		ref,

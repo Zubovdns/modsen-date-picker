@@ -1,10 +1,9 @@
-// TaskDatepicker.service.ts
 import { MutableRefObject, useImperativeHandle, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Task } from './types';
+import { Task, TaskDatepickerServiceInterface } from './types';
 
-class TaskDatepickerService {
+class TaskDatepickerService implements TaskDatepickerServiceInterface {
 	private tasks: { [key: string]: Task[] } = {};
 
 	constructor() {
@@ -70,8 +69,12 @@ class TaskDatepickerService {
 	}
 }
 
-export const useTaskDatepickerService = (ref: MutableRefObject<unknown>) => {
-	const serviceRef = useRef(new TaskDatepickerService());
+export const useTaskDatepickerService = (
+	ref: MutableRefObject<TaskDatepickerServiceInterface | null>
+) => {
+	const serviceRef = useRef<TaskDatepickerServiceInterface>(
+		new TaskDatepickerService()
+	);
 
 	useImperativeHandle(
 		ref,

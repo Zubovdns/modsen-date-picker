@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import { v4 as uuidv4 } from 'uuid';
 
 const getDaysInMonth = (date: Date) =>
@@ -7,9 +6,14 @@ const getDaysInMonth = (date: Date) =>
 const getFirstDayOfMonth = (
 	date: Date,
 	startDayOfWeek: 'sunday' | 'monday'
-) => {
+): number => {
 	const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-	return startDayOfWeek === 'sunday' ? day : day === 0 ? 6 : day - 1;
+
+	if (startDayOfWeek === 'sunday') {
+		return day;
+	}
+
+	return day === 0 ? 6 : day - 1;
 };
 
 const isHoliday = (date: Date) => {
