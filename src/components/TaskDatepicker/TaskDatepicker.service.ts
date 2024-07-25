@@ -1,4 +1,3 @@
-import { MutableRefObject, useImperativeHandle, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Task, TaskDatepickerServiceInterface } from './types';
@@ -69,27 +68,4 @@ class TaskDatepickerService implements TaskDatepickerServiceInterface {
 	}
 }
 
-export const useTaskDatepickerService = (
-	ref: MutableRefObject<TaskDatepickerServiceInterface | null>
-) => {
-	const serviceRef = useRef<TaskDatepickerServiceInterface>(
-		new TaskDatepickerService()
-	);
-
-	useImperativeHandle(
-		ref,
-		() => ({
-			getTasks: (date: string) => serviceRef.current.getTasks(date),
-			addTask: (date: string) => serviceRef.current.addTask(date),
-			removeTask: (date: string, taskId: string) =>
-				serviceRef.current.removeTask(date, taskId),
-			toggleTaskCompletion: (date: string, taskId: string) =>
-				serviceRef.current.toggleTaskCompletion(date, taskId),
-			updateTaskText: (date: string, taskId: string, text: string) =>
-				serviceRef.current.updateTaskText(date, taskId, text),
-			loadTasksForDate: (date: string) =>
-				serviceRef.current.loadTasksForDate(date),
-		}),
-		[]
-	);
-};
+export const taskDatepickerServiceInstance = new TaskDatepickerService();

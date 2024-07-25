@@ -1,15 +1,12 @@
-import { ComponentType, FC, useRef, useState } from 'react';
+import { ComponentType, FC, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
 import { ErrorBoundary } from '../ErrorBoundary';
 
-import { useDatepickerService } from './Datepicker.service';
+import { datepickerServiceInstance } from './Datepicker.service';
 import { DatepickerContainer } from './styled';
-import {
-	DatepickerServiceInterface,
-	WithDatepickerServiceProps,
-} from './types';
+import { WithDatepickerServiceProps } from './types';
 
 const withDatepickerService = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
@@ -17,23 +14,18 @@ const withDatepickerService = <P extends CalendarProps>(
 	const WithDatepickerService: FC<Omit<P, keyof WithDatepickerServiceProps>> = (
 		props
 	) => {
-		const calendarServiceRef = useRef<DatepickerServiceInterface>(null!);
-		useDatepickerService(calendarServiceRef);
-
 		const [selectedDate, setSelectedDate] = useState<Date | null>(
 			props.defaultValue || new Date()
 		);
 
 		const handleDateSelect = (date: Date | null) => {
 			setSelectedDate(date);
-			if (calendarServiceRef.current) {
-				calendarServiceRef.current.selectDate(date);
-			}
+			datepickerServiceInstance.selectDate(date);
 		};
 
 		const handleClear = () => {
 			setSelectedDate(null);
-			calendarServiceRef.current.clearDate();
+			datepickerServiceInstance.clearDate();
 		};
 
 		return (

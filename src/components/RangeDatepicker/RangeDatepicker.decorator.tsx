@@ -1,15 +1,12 @@
-import { ComponentType, FC, useRef, useState } from 'react';
+import { ComponentType, FC, useState } from 'react';
 
 import { CalendarProps } from '../Calendar/types';
 import DateInput from '../DateInput';
 import { ErrorBoundary } from '../ErrorBoundary';
 
-import { useRangeDatepickerService } from './RangeDatepicker.service';
+import { rangeDatepickerServiceInstance } from './RangeDatepicker.service';
 import { RangeDatepickerContainer } from './styled';
-import {
-	RangeDatepickerServiceInterface,
-	WithRangeDatepickerServiceProps,
-} from './types';
+import { WithRangeDatepickerServiceProps } from './types';
 
 const withRangeDatepicker = <P extends CalendarProps>(
 	WrappedComponent: ComponentType<P>
@@ -17,38 +14,35 @@ const withRangeDatepicker = <P extends CalendarProps>(
 	const WithRangeDatepickerService: FC<
 		Omit<P, keyof WithRangeDatepickerServiceProps>
 	> = (props) => {
-		const calendarServiceRef = useRef<RangeDatepickerServiceInterface>(null!);
-		useRangeDatepickerService(calendarServiceRef);
-
 		const [startDate, setStartDate] = useState<Date | null>(
 			props.defaultValue || null
 		);
 		const [endDate, setEndDate] = useState<Date | null>(null);
 
 		const handleDateSelect = (date: Date) => {
-			calendarServiceRef.current.selectDate(date);
-			setStartDate(calendarServiceRef.current.getStartDate());
-			setEndDate(calendarServiceRef.current.getEndDate());
+			rangeDatepickerServiceInstance.selectDate(date);
+			setStartDate(rangeDatepickerServiceInstance.getStartDate());
+			setEndDate(rangeDatepickerServiceInstance.getEndDate());
 		};
 
 		const handleStartDateSelect = (date: Date | null) => {
-			calendarServiceRef.current.selectStartDate(date);
-			setStartDate(calendarServiceRef.current.getStartDate());
+			rangeDatepickerServiceInstance.selectStartDate(date);
+			setStartDate(rangeDatepickerServiceInstance.getStartDate());
 		};
 
 		const handleEndDateSelect = (date: Date | null) => {
-			calendarServiceRef.current.selectEndDate(date);
-			setEndDate(calendarServiceRef.current.getEndDate());
+			rangeDatepickerServiceInstance.selectEndDate(date);
+			setEndDate(rangeDatepickerServiceInstance.getEndDate());
 		};
 
 		const handleClearStartDate = () => {
-			calendarServiceRef.current.clearStartDate();
-			setStartDate(calendarServiceRef.current.getStartDate());
+			rangeDatepickerServiceInstance.clearStartDate();
+			setStartDate(rangeDatepickerServiceInstance.getStartDate());
 		};
 
 		const handleClearEndDate = () => {
-			calendarServiceRef.current.clearEndDate();
-			setEndDate(calendarServiceRef.current.getEndDate());
+			rangeDatepickerServiceInstance.clearEndDate();
+			setEndDate(rangeDatepickerServiceInstance.getEndDate());
 		};
 
 		return (
