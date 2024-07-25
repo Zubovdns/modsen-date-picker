@@ -1,0 +1,50 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"jsx": "react-jsx",
+
+		"module": "ESNext",
+		"moduleResolution": "Node",
+
+		"allowJs": false,
+		"maxNodeModuleJsDepth": 1,
+
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"sourceMap": true,
+		"outDir": "dist",
+		"declarationDir": "types",
+
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+
+		"strict": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"allowUnreachableCode": false,
+
+		"skipLibCheck": true,
+
+		"baseUrl": "./src",
+		"paths": {
+			"@src/*": ["*"],
+			"@components/*": ["components/*"],
+			"@stories/*": ["stories/*"],
+			"@utils/*": ["utils/*"],
+			"@constants/*": ["constants/*"],
+			"@assets/*": ["assets/*"],
+			"@icons/*": ["assets/icons*"],
+			"@styles/*": ["styles/*"]
+		}
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "*.config.js"],
+	"types": ["node"]
+}

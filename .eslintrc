@@ -1,0 +1,61 @@
+{
+	"root": true,
+	"extends": [
+		"plugin:react/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:storybook/recommended",
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 2015,
+		"ecmaFeatures": {
+			"jsx": true,
+		},
+	},
+	"env": {
+		"es6": true,
+		"browser": true,
+		"node": true,
+	},
+	"plugins": [
+		"@typescript-eslint",
+		"react",
+		"react-hooks",
+		"simple-import-sort",
+	],
+	"rules": {
+		"@typescript-eslint/no-var-requires": "off",
+		"react/react-in-jsx-scope": "off",
+		"no-fallthrough": "off",
+		"no-multiple-empty-lines": [
+			1,
+			{
+				"max": 2,
+			},
+		],
+		"arrow-body-style": ["warn", "as-needed"],
+		"no-nested-ternary": 1,
+		"eqeqeq": 2,
+		"react/prop-types": "off",
+		"simple-import-sort/imports": [
+			"warn",
+			{
+				"groups": [
+					["^\\u0000"],
+					["^react", "^@?\\w"],
+					["^(@|components|utils|hooks|config|vendored-lib)(/.*|$)"],
+					["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+					["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+					["^.+\\.s?css$"],
+				],
+			},
+		],
+		"simple-import-sort/exports": "warn",
+	},
+	"settings": {
+		"react": {
+			"version": "detect",
+		},
+	},
+}
