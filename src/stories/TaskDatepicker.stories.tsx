@@ -12,6 +12,9 @@ const meta: Meta<typeof TaskDatepicker> = {
 		withExtraDays: {
 			control: 'boolean',
 		},
+		withWeekends: {
+			control: 'boolean',
+		},
 		withHolidays: {
 			control: 'boolean',
 		},

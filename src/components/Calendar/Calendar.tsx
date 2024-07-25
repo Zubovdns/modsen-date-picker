@@ -16,6 +16,7 @@ const Calendar: FC<CalendarProps> = ({
 	defaultValue = new Date(),
 	startDayOfWeek = 'monday',
 	withExtraDays = false,
+	withWeekends = false,
 	withHolidays = false,
 	selectedDate,
 	startDate,
@@ -87,6 +88,7 @@ const Calendar: FC<CalendarProps> = ({
 							currentDate={currentDate}
 							startDayOfWeek={startDayOfWeek}
 							withExtraDays={withExtraDays}
+							withWeekends={withWeekends}
 							withHolidays={withHolidays}
 							onSelectDate={onDateSelect}
 							selectedDate={selectedDate}

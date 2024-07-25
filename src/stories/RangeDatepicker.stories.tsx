@@ -12,6 +12,9 @@ const meta: Meta<typeof RangeDatepicker> = {
 		withExtraDays: {
 			control: 'boolean',
 		},
+		withWeekends: {
+			control: 'boolean',
+		},
 		withHolidays: {
 			control: 'boolean',
 		},

@@ -6,6 +6,7 @@ export type CalendarProps = {
 	defaultValue?: Date;
 	startDayOfWeek?: 'sunday' | 'monday';
 	withExtraDays?: boolean;
+	withWeekends?: boolean;
 	withHolidays?: boolean;
 } & Partial<
 	WithDatepickerServiceProps &

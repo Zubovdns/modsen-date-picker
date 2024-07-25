@@ -9,6 +9,7 @@ export const Days = styled.div`
 
 export const Day = styled.div<{
 	$isOutsideMonth: boolean;
+	$weekend: boolean;
 	$holiday: boolean;
 	$isSelected: boolean;
 	$isStartDate: boolean;
@@ -27,6 +28,7 @@ export const Day = styled.div<{
 
 	color: ${({
 		$isOutsideMonth,
+		$weekend,
 		$holiday,
 		$isSelected,
 		$isStartDate,
@@ -35,9 +37,9 @@ export const Day = styled.div<{
 	}) => {
 		if ($isSelected || $isStartDate || $isEndDate) {
 			return colors.dateSelectedText;
-		} else if ($holiday && $isOutsideMonth && $withExtraDays) {
+		} else if (($weekend || $holiday) && $isOutsideMonth && $withExtraDays) {
 			return colors.holidayInactiveDateText;
-		} else if ($holiday) {
+		} else if ($weekend || $holiday) {
 			return colors.holidayDateText;
 		} else if ($isOutsideMonth && $withExtraDays) {
 			return colors.inactiveDateText;
