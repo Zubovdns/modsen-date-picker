@@ -2,7 +2,7 @@ name: Deploy to Netlify
 
 on:
   push:
-    branches: [hotfix/add-ci-cd]
+    branches: [master]
 
 jobs:
   build:
